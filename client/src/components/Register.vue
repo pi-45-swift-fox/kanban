@@ -5,12 +5,12 @@
         <div class="myform form">
           <div class="logo mb-3">
             <div class="col-md-12 text-center">
-              <h1>Register</h1>
+              <h1 class="text-white">Register</h1>
             </div>
           </div>
           <form action method="post" name="registration">
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
+              <label for="exampleInputEmail1" class="text-white">Email address</label>
               <input
                 type="email"
                 name="email"
@@ -21,7 +21,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Username</label>
+              <label for="exampleInputEmail1" class="text-white">Username</label>
               <input
                 type="text"
                 name="Username"
@@ -32,7 +32,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Password</label>
+              <label for="exampleInputEmail1" class="text-white">Password</label>
               <input
                 type="password"
                 name="password"

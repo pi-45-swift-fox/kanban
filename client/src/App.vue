@@ -1,14 +1,12 @@
 <template>
   <div>
-    <!-- navbar -->
-    <nav class="navbar navbar-light bg-light justify-content-between">
-      <a class="navbar-brand">Kanban</a>
+    <nav class="navbar navbar-dark bg-dark justify-content-between">
+      <a class="navbar-brand text-white">Kanban</a>
       <div v-if="page === 'home'">
         <button class="btn btn-outline-danger my-2 my-sm-0" @click="logout()">Logout</button>
       </div>
       <div v-else></div>
     </nav>
-    <!-- main -->
     <div v-if="page === 'login'">
       <Login @changePage="changePage"></Login>
     </div>
@@ -80,7 +78,10 @@ export default {
         });
     },
     changePage(val) {
-      this.fetchData();
+      if (val === 'home') {
+        this.fetchData();
+      }
+      
       this.page = val;
     },
     logout() {

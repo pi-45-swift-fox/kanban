@@ -5,12 +5,12 @@
         <div class="myform form">
           <div class="logo mb-3">
             <div class="col-md-12 text-center">
-              <h1>Login</h1>
+              <h1 class="text-white">Login</h1>
             </div>
           </div>
           <form action method="post" name="login" @submit.prevent="submitLogin()">
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
+              <label for="exampleInputEmail1" class="text-white">Email address</label>
               <input
                 type="email"
                 name="email"
@@ -21,7 +21,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Password</label>
+              <label for="exampleInputEmail1" class="text-white">Password</label>
               <input
                 type="password"
                 name="password"
@@ -38,7 +38,7 @@
             <div class="col-md-12 text-center">
               <div class="login-or">
                 <hr class="hr-or" />
-                <span class="span-or">or you can use</span>
+                <span class="span-or text-white">or you can use</span>
               </div>
             </div>
             <div class="col-md-12 mb-3">
@@ -47,7 +47,7 @@
               </div>
             </div>
             <div class="form-group">
-              <p class="text-center">
+              <p class="text-center text-white">
                 Don't have account?
                 <a href="#" id="signup" @click="changePage('register')">
                   Sign up
