@@ -5,7 +5,6 @@ const { User } = require('../models')
 class UserController {
   static register(req, res, next) {
     let { email, password, verifypassword } = req.body
-    console.log({ email, password, verifypassword });
     if (password == verifypassword) {
       User.create({
           email: email,
