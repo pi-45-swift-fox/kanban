@@ -1,0 +1,2 @@
+user.createdAt = user.createdAt.toLocaleDateString()
+user.updatedAt = user.updatedAt.toLocaleDateString()
