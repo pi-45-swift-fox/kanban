@@ -19,6 +19,9 @@
         <a @click.prevent="register" href="" ><button type="button" class="btn-primary">No account? Register here!</button></a>
         <br><br>
         <button type="submit" class="btn btn-primary btn-success">Submit</button>
+        <!-- <br>
+        <label for="" class="mt-4">Log In Using Google</label>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
       </form>
     </div>
   </div>
@@ -58,7 +61,14 @@ export default {
       },
       register() {
         this.$emit('pageStatus', 'register-page')
-      }
+      },
+      // onSignIn(googleUser) {
+      //   var profile = googleUser.getBasicProfile();
+      //   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      //   console.log('Name: ' + profile.getName());
+      //   console.log('Image URL: ' + profile.getImageUrl());
+      //   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      // }
     }
 };
 </script>
