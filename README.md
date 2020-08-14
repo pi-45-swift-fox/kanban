@@ -6,8 +6,8 @@ List of available endpoint:
 
   - `POST /dashboard`
   - `GET /dashboard`
-  - `PUT /todos/:id`
-  - `DELETE /todos/:id`
+  - `PUT /dashboard/:id`
+  - `DELETE /dashboard/:id`
   - `POST /register`
   - `POST /login`
 
