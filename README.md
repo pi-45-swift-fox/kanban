@@ -7,9 +7,9 @@ Membuat website untuk manajemen task
 ##### Mendapatkan tasks user yang logged in
 
 #### Request Headers
-> { 
+>
     "access_token": "your access token"
-> } 
+> 
 
 #### Request Body
 >
@@ -32,8 +32,8 @@ Membuat website untuk manajemen task
  >
   "msg": "Tidak ada token terkirim/terdaftar"
  >
- <br />
- ### POST `/login`
+
+### POST `/login`
 ##### Mendapatkan akses (token) user dalam database
 
 #### Request Headers
