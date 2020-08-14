@@ -14,7 +14,7 @@
               <input
                 type="email"
                 name="email"
-                class="form-control bg-dark border border-dark"
+                class="form-control bg-dark border border-dark text-white"
                 v-model="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
@@ -25,7 +25,7 @@
               <input
                 type="text"
                 name="Username"
-                class="form-control bg-dark border border-dark"
+                class="form-control bg-dark border border-dark text-white"
                 v-model="username"
                 aria-describedby="emailHelp"
                 placeholder="Enter Username"
@@ -37,7 +37,7 @@
                 type="password"
                 name="password"
                 v-model="password"
-                class="form-control bg-dark border border-dark"
+                class="form-control bg-dark border border-dark text-white"
                 aria-describedby="emailHelp"
                 placeholder="Enter Password"
               />
