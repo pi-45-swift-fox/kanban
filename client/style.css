@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@700&family=Red+Rose:wght@700&display=swap');
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: green; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: black; 
+  }
+
+* {
+    font-family: 'Red Rose';
+    color: white;
+}
+
+
+input {
+    color: black;
+    font-family: 'Kanit', sans-serif !important;
+}
+
+body {
+    background-image: url("green-tile.png");
+}
+
+.login-page {
+    width: 410px;
+}
+
+.cs-opacity {
+    opacity: 90%;
+}
+
+.navbar {
+    background-color: rgb(0, 54, 0) !important;
+}
+
+.cs-grid {
+    min-width: 410px;
+}
+
+.cs-bg-1 {
+    background-color: rgb(0, 54, 0) !important;
+}
+
+.cs-bg-white {
+    background-color: rgba(255, 255, 255, 0.712);
+}
+
+.content-box {
+    height: 750px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-white {
+    color: white;
+}
+
+.center-content {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cs-card {
+    width: 700px !important;
+}
+
+.zoom {
+    transition: transform .2s;
+}
+  
+.zoom:hover {
+    transform: scale(1.03);
+}
