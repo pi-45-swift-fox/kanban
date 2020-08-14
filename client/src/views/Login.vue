@@ -96,7 +96,7 @@ export default {
     googleLogin (idToken) {
       axios({
         method: "POST",
-        url: `http://localhost:3000/googleSignIn`,
+        url: `https://arcane-river-55482.herokuapp.com/googleSignIn`,
         headers: {
           google_token: idToken
         }
