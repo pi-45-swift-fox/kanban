@@ -14,7 +14,7 @@
               <input
                 type="email"
                 name="email"
-                class="form-control"
+                class="form-control bg-dark border border-dark"
                 v-model="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
@@ -26,7 +26,7 @@
                 type="password"
                 name="password"
                 v-model="password"
-                class="form-control"
+                class="form-control bg-dark border border-dark"
                 aria-describedby="emailHelp"
                 placeholder="Enter Password"
               />
@@ -64,7 +64,7 @@
 
 <script>
 import axios from "../api/axios";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2/src/sweetalert2.js';
 import GoogleSignIn from "./GoogleSignIn";
 
 export default {

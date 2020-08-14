@@ -1,7 +1,7 @@
 <template>
   <div>
     <g-signin-button
-      class="btn btn-light"
+      class="btn btn-secondary"
       :params="googleSignInParams"
       @success="onSignInSuccess"
       @error="onSignInError"
@@ -67,8 +67,6 @@ export default {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 3px;
-  background-color: #3c82f7;
   color: #fff;
-  box-shadow: 0 3px 0 #0f69ff;
 }
 </style>
