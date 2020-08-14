@@ -7,9 +7,9 @@ Membuat website untuk manajemen task
 ##### Mendapatkan tasks user yang logged in
 
 #### Request Headers
-> { <br />
-    "access_token": "your access token" <br />
-> } <br />
+> { 
+    "access_token": "your access token"
+> } 
 
 #### Request Body
 >
@@ -18,21 +18,21 @@ Membuat website untuk manajemen task
 
 #### Response (200)
 >
-    "id": "Task serialized ID",<br />
-    "title": "Task title",<br />
-    "description": "Task description",<br />
-    "status": "Task status",<br />
-    "UserId": "User (Owner) ID",<br />
-    "organization": "<User (Owner) organization>",<br />
-    "createdAt": "Date Sequelize",<br />
-    "updatedAt": "Date Sequelize"<br />
+    "id": "Task serialized ID",
+    "title": "Task title",
+    "description": "Task description",
+    "status": "Task status",
+    "UserId": "User (Owner) ID",
+    "organization": "User (Owner) organization",
+    "createdAt": "Date Sequelize",
+    "updatedAt": "Date Sequelize"
  >
  
  #### Response (409)
  >
   "msg": "Tidak ada token terkirim/terdaftar"
  >
- 
+ <br />
  ### POST `/login`
 ##### Mendapatkan akses (token) user dalam database
 
@@ -43,23 +43,23 @@ Membuat website untuk manajemen task
 
 #### Request Body
 >
-    "email": "Input email user",<br />
-    "password": "Input password user"<br />
+    "email": "Input email user",
+    "password": "Input password user"
 >
 
 #### Response (200)
 >
-    "username": "Username yang teregister dalam database",<br />
-    "token": "Token User menjadi access ke server",<br />
+    "username": "Username yang teregister dalam database",
+    "token": "Token User untuk access ke server"
  >
  
  #### Response (401)
  >
   "msg": "Email/password salah"
  >
- 
+ <br />
 ### POST `/register`
-##### Mendapatkan akses (token) user dalam database
+##### Mendaftarkan data user ke dalam database
 
 #### Request Headers
 >
@@ -68,14 +68,14 @@ Membuat website untuk manajemen task
 
 #### Request Body
 >
-    "username": "Input username User",<br />
-    "email": "Input email User",<br />
-    "password": "Input password User"<br />
+    "username": "Input username User",
+    "email": "Input email User",
+    "password": "Input password User"
 >
 
 #### Response (200)
 >
-    "msg": "OK",<br />
+    "msg": "OK"
  >
  
 #### Response (400)
@@ -86,4 +86,127 @@ Membuat website untuk manajemen task
 #### Response (409)
 >
  "msg": "Email sudah terdaftar"
+>
+ <br />
+### POST `/google-login`
+##### Mendapatkan akses (token) user dalam database melalui google
+
+#### Request Headers
+>
+    _Tidak diperlukan_
+>
+
+#### Request Body
+>
+    "username": "Input username User",
+    "email": "Input email User",
+    "password": "Input password User"
+>
+
+#### Response (200)
+>
+    "username": "Username yang teregister dalam database",
+    "token": "Token User untuk access ke server"
+>
+ <br />
+### POST `/tasks`
+##### Menambahkan task baru ke database sesuai user yang logged in
+
+#### Request Headers
+>
+    "access_token": "Token provided dari client"
+>
+
+#### Request Body
+>
+    "title": "Task title",
+    "description": "Task description",
+    "status": "Task status"
+>
+
+#### Response (201)
+>
+    "id": "Task serialized ID",
+    "title": "Task title (new)",
+    "description": "Task description (new)",
+    "status": "Task status (new)",
+    "UserId": "User (Owner) ID",
+    "organization": "User (Owner) organization",
+    "createdAt": "Current Date",
+    "updatedAt": "Current Date"
+>
+
+#### Response (400)
+>
+    "msg": "Terjadi kesalahan input"
+>
+
+#### Response (409)
+>
+    "msg": "Tidak ada token terkirim/terdaftar"
+>
+
+ <br />
+### PUT `/tasks/id`
+##### Mengedit task di database sesuai user yang logged in
+
+#### Request Headers
+>
+    "access_token": "Token provided dari client"
+>
+
+#### Request Body
+>
+    "title": "Task title",
+    "description": "Task description",
+    "status": "Task status"
+>
+
+#### Response (201)
+>
+    "msg": "OK"
+>
+
+#### Response (400)
+>
+    "msg": "Terjadi kesalahan input"
+>
+
+#### Response (404)
+>
+    "msg": "Task tidak ditemukan"
+>
+
+#### Response (409)
+>
+    "msg": "Tidak ada token terkirim/terdaftar"
+>
+
+ <br />
+### DELETE `/tasks/id`
+##### Menghapus task di database sesuai user yang logged in
+
+#### Request Headers
+>
+    "access_token": "Token provided dari client"
+>
+
+#### Request Body
+>
+    _Tidak Perlu_
+>
+
+#### Response (200)
+>
+    "msg": "OK"
+>
+
+#### Response (404)
+>
+    "msg": "Task tidak ditemukan"
+>
+
+#### Response (409)
+>
+    "msg": "Tidak ada token terkirim/terdaftar"
 >
