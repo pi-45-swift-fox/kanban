@@ -129,26 +129,24 @@ export default {
                                     access_token: localStorage.access_token
                                 }
                             })
-                                .then(result => {
-                                    this.refresh()
-                                    Swal.fire(
-                                        'Deleted!',
-                                        'Your file has been deleted.',
-                                        'success'
-                                    )
-                                    console.log(result);
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                })
-                            
                         }
+                    })
+                    .then(result => {
+                        this.refresh()
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    })
+                    .catch(err => {
                         Swal.fire({
-                                title: 'Error!',
-                                text: 'You Only Can Delete Your Own List',
-                                icon: 'error',
-                                confirmButtonText: 'Ok'
-                            })
+                            title: 'Error!',
+                            text: 'You Only Can Delete Your Own List',
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                        })
+                        console.log(err);
                     })
         },
         refresh() {
