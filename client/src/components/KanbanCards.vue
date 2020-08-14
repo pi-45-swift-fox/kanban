@@ -140,12 +140,12 @@ export default {
                         )
                     })
                     .catch(err => {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'You Only Can Delete Your Own List',
-                            icon: 'error',
-                            confirmButtonText: 'Ok'
-                        })
+                        // Swal.fire({
+                        //     title: 'Error!',
+                        //     text: 'You Only Can Delete Your Own List',
+                        //     icon: 'error',
+                        //     confirmButtonText: 'Ok'
+                        // })
                         console.log(err);
                     })
         },

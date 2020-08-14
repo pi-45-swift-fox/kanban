@@ -96,7 +96,6 @@ class KanbanController {
         else {
           data.update(updatedData, { where: { id: data.id } })
             .then(result => {
-              console.log('aad');
               return res.status(200).json({ result })
             })
         }
