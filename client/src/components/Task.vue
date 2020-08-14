@@ -75,7 +75,7 @@ export default {
           
           Axios({
               method: "PUT",
-              url: `http://localhost:3000/tasks/${id}`,
+              url: `https://arcane-river-55482.herokuapp.com/tasks/${id}`,
               headers: {
                   access_token : localStorage.access_token
               },
@@ -129,7 +129,7 @@ export default {
       editCategory(category, id) {
           Axios({
               method: "PUT",
-              url: `http://localhost:3000/tasks/${id}`,
+              url: `https://arcane-river-55482.herokuapp.com/tasks/${id}`,
               headers: {
                   access_token : localStorage.access_token
               },
@@ -153,7 +153,7 @@ export default {
       deleteTask(id) {
           Axios({
               method: "DELETE",
-              url: `http://localhost:3000/tasks/${id}`,
+              url: `https://arcane-river-55482.herokuapp.com/tasks/${id}`,
               headers: {
                   access_token : localStorage.access_token
               },

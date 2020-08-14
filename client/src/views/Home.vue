@@ -39,7 +39,7 @@ export default {
     getAlltask () {
       axios({
         method: "GET",
-        url: "http://localhost:3000/tasks",
+        url: "https://arcane-river-55482.herokuapp.com/tasks",
         headers: {
           access_token : localStorage.access_token
         }

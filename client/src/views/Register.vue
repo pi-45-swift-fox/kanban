@@ -67,7 +67,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: "http://localhost:3000/register",
+          url: "https://arcane-river-55482.herokuapp.com/register",
           data: {
             name: this.nameRegister,
             email: this.emailRegister,

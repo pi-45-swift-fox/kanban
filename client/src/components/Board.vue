@@ -50,7 +50,7 @@ export default {
       submit (title) {
           axios({
               method: "POST",
-              url: "http://localhost:3000/tasks",
+              url: "https://arcane-river-55482.herokuapp.com/tasks",
               headers: {
                   access_token : localStorage.access_token
               },
