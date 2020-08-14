@@ -3,7 +3,6 @@ const { Kanban, User } = require('../models')
 class KanbanController {
 
   static show(req, res, next) {
-    console.log('masuk findall');
     Kanban.findAll({
       order: [['createdAt', 'DESC']],
       include: [{ model: User, attributes: ['email'] }]
