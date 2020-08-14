@@ -4,6 +4,12 @@ const TaskController = require('../controllers/TaskController')
 const authenticate = require('../middlewares/authenticate')
 const authorization = require('../middlewares/authorization')
 
+route.get('/', function(req, res, next) {
+    res.status(200).json({
+        msg: 'welcome to heroku'
+    })
+}) 
+
 route.post('/login', UserController.login)
 route.post('/register', UserController.register)
 route.post('/googleSign', UserController.googleSign)
