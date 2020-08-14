@@ -57,7 +57,7 @@ Membuat website untuk manajemen task
  >
   "msg": "Email/password salah"
  >
- <br />
+
 ### POST `/register`
 ##### Mendaftarkan data user ke dalam database
 
@@ -87,7 +87,7 @@ Membuat website untuk manajemen task
 >
  "msg": "Email sudah terdaftar"
 >
- <br />
+
 ### POST `/google-login`
 ##### Mendapatkan akses (token) user dalam database melalui google
 
@@ -108,7 +108,7 @@ Membuat website untuk manajemen task
     "username": "Username yang teregister dalam database",
     "token": "Token User untuk access ke server"
 >
- <br />
+
 ### POST `/tasks`
 ##### Menambahkan task baru ke database sesuai user yang logged in
 
@@ -146,7 +146,6 @@ Membuat website untuk manajemen task
     "msg": "Tidak ada token terkirim/terdaftar"
 >
 
- <br />
 ### PUT `/tasks/id`
 ##### Mengedit task di database sesuai user yang logged in
 
@@ -182,7 +181,6 @@ Membuat website untuk manajemen task
     "msg": "Tidak ada token terkirim/terdaftar"
 >
 
- <br />
 ### DELETE `/tasks/id`
 ##### Menghapus task di database sesuai user yang logged in
 
