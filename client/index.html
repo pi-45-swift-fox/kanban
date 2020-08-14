@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark">
+  <div id="app">
+    <!-- {{msg}}
+    <button-counter></button-counter> -->
+    <!-- LOGIN PAGE -->
+
+    <!-- <div>
+      <div class="row justify-content-center mt-5">
+        <div class="col-4">
+          <form @submit.prevent="login">
+            <div class="form-group">
+              <label for="email">Email :</label>
+              <input type="text" class="form-control" v-model="emailLogin" id="email" placeholder="Email"/>
+            </div>
+            <div class="form-group">
+              <label for="password">Password :</label>
+              <input type="password" class="form-control" v-model="passwordLogin" id="password" placeholder="Password"
+              />
+            </div>
+            <button type="submit" class="btn btn-outline-success">Login</button>
+            <a class="btn btn-outline-info mx-2" href="#" @click="registerForm">Register</a>
+          </form>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- HOME PAGE -->
+
+    <!-- <div class="container mt-4">
+      <div class="category ml-3 p-2 bg-secondary">
+        <div class="header">
+          <span>Backlog</span>
+        </div>
+        <div class="content">
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">hari ini saya mandi</div>
+            <div class="content-footer ">
+              <div class="sender">By adnan</div>
+              <div class="date">10 Juni 2019</div>
+            </div>
+          </div>
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">kemarin kayaknya sudah mandi</div>
+            <div class="content-footer ">
+              <div class="sender">By goku</div>
+              <div class="date">5 Mei 2020</div>
+            </div>
+          </div>
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">Makan dulu</div>
+            <div class="content-footer ">
+              <div class="sender">By bejita</div>
+              <div class="date">25 Februari 2020</div>
+            </div>
+          </div>
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">Makan dulu</div>
+            <div class="content-footer ">
+              <div class="sender">By bejita</div>
+              <div class="date">25 Februari 2020</div>
+            </div>
+          </div>
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">Makan dulu</div>
+            <div class="content-footer ">
+              <div class="sender">By bejita</div>
+              <div class="date">25 Februari 2020</div>
+            </div>
+          </div>
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">Makan dulu</div>
+            <div class="content-footer ">
+              <div class="sender">By bejita</div>
+              <div class="date">25 Februari 2020</div>
+            </div>
+          </div>
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">Makan dulu</div>
+            <div class="content-footer ">
+              <div class="sender">By bejita</div>
+              <div class="date">25 Februari 2020</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>Add a card...</span>
+        </div>
+      </div>
+      <div class="category ml-3 p-2 bg-secondary">
+        <div class="header">
+          <span>Todo</span>
+        </div>
+        <div class="content">
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">hari ini saya mandi</div>
+            <div class="content-footer ">
+              <div class="sender">By adnan</div>
+              <div class="date">10 Juni 2019</div>
+            </div>
+          </div>
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">kemarin kayaknya sudah mandi</div>
+            <div class="content-footer ">
+              <div class="sender">By goku</div>
+              <div class="date">5 Mei 2020</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>Add a card...</span>
+        </div>
+      </div>
+      <div class="category ml-3 p-2 bg-secondary">
+        <div class="header">
+          <span>Doing</span>
+        </div>
+        <div class="content">
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">hari ini saya mandi</div>
+            <div class="content-footer ">
+              <div class="sender">By adnan</div>
+              <div class="date">10 Juni 2019</div>
+            </div>
+          </div>
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">kemarin kayaknya sudah mandi</div>
+            <div class="content-footer ">
+              <div class="sender">By goku</div>
+              <div class="date">5 Mei 2020</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>Add a card...</span>
+        </div>
+      </div>
+      <div class="category ml-3 p-2 bg-secondary">
+        <div class="header">
+          <span>Done</span>
+        </div>
+        <div class="content">
+          <div class="content-list mb-2 p-2">
+            <div class="content-header">hari ini saya mandi</div>
+            <div class="content-footer ">
+              <div class="sender">By adnan</div>
+              <div class="date">10 Juni 2019</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>Add a card...</span>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script src="/src/main.js"></script>
+</body>
+</html>
