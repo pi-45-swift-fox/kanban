@@ -64,7 +64,6 @@ export default {
           }
         },
       }).then((input) => {
-        // this.fetchData();
         if (input.isConfirmed) {
           axios({
             method: "PUT",
@@ -91,7 +90,6 @@ export default {
             });
         }
       });
-      this.fetchData();
     },
   },
 };

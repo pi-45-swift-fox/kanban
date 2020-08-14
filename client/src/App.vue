@@ -10,7 +10,7 @@
     </nav>
     <!-- main -->
     <div v-if="page === 'login'">
-      <Login @changePage="changePage" @fetchData="fetchData"></Login>
+      <Login @changePage="changePage"></Login>
     </div>
     <div v-else-if="page === 'register'">
       <Register @changePage="changePage"></Register>
@@ -80,12 +80,18 @@ export default {
         });
     },
     changePage(val) {
+      this.fetchData();
       this.page = val;
     },
     logout() {
       this.page = "login";
       localStorage.removeItem("access_token");
       localStorage.removeItem("username");
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+
     },
   },
 };

@@ -42,8 +42,8 @@
               </div>
             </div>
             <div class="col-md-12 mb-3">
-              <div class="g-signin2" data-onsuccess="onSignIn">
-                
+              <div class="mx-auto my-4" style="width: 5rem;">
+                <GoogleSignIn @changePage="changePage"></GoogleSignIn>
               </div>
             </div>
             <div class="form-group">
@@ -65,9 +65,13 @@
 <script>
 import axios from "../api/axios";
 import Swal from "sweetalert2";
+import GoogleSignIn from "./GoogleSignIn";
 
 export default {
   name: "Login",
+  components: {
+    GoogleSignIn,
+  },
   data() {
     return {
       email: "",
@@ -91,7 +95,6 @@ export default {
           localStorage.access_token = data.token;
 
           this.changePage("home");
-          this.$emit('fetchData');
         })
         .catch((error) => {
           if (error.response) {
