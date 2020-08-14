@@ -120,34 +120,34 @@ export default {
                 cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Yes, delete it!'
                 })
-                    .then((result) => {
-                        if (result.value) {
-                            axios({
-                                method: 'DELETE',
-                                url: `https://protected-hollows-86433.herokuapp.com/kanbans/${id}`,
-                                headers: {
-                                    access_token: localStorage.access_token
-                                }
-                            })
-                            .then(result => {
-                                this.refresh()
-                                Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
-                                    'success'
-                                )
-                            })
-                            .catch(err => {
-                                // Swal.fire({
-                                //     title: 'Error!',
-                                //     text: 'You Only Can Delete Your Own List',
-                                //     icon: 'error',
-                                //     confirmButtonText: 'Ok'
-                                // })
-                                console.log(err);
-                            })
-                        }
-                    })
+                    // .then((result) => {
+                    //     if (result.value) {
+                    //         axios({
+                    //             method: 'DELETE',
+                    //             url: `https://protected-hollows-86433.herokuapp.com/kanbans/${id}`,
+                    //             headers: {
+                    //                 access_token: localStorage.access_token
+                    //             }
+                    //         })
+                    //         .then(result => {
+                    //             this.refresh()
+                    //             Swal.fire(
+                    //                 'Deleted!',
+                    //                 'Your file has been deleted.',
+                    //                 'success'
+                    //             )
+                    //         })
+                    //         .catch(err => {
+                    //             // Swal.fire({
+                    //             //     title: 'Error!',
+                    //             //     text: 'You Only Can Delete Your Own List',
+                    //             //     icon: 'error',
+                    //             //     confirmButtonText: 'Ok'
+                    //             // })
+                    //             console.log(err);
+                    //         })
+                    //     }
+                    // })
                     
         },
         refresh() {
