@@ -53,9 +53,18 @@ _Response (200)_
     "id": 1,
     "title": "<Deadline Challange>",
     "category": "<Backlog>",
-    "UserId": "<4>",
+    "UserId": "<2>",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "User": {
+        "id": 2,
+        "name": "Khairil",
+        "email": "baril@gmail.com",
+        "password": "$2b$10$EtE8heNEZIApCCtcWB38C.JJKJ7JjpuvdthX1nIu3QGugQa.jvXpK",
+        "organization": "Hacktiv8",
+        "createdAt": "2020-03-20T07:15:12.149Z",
+        "updatedAt": "2020-03-20T07:15:12.149Z",
+    }
   }
 ]
 ```
@@ -101,7 +110,7 @@ _Response (200)_
     "id": 1,
     "title": "<Deadline Challange>",
     "category": "<Backlog>",
-    "UserId": "<4>",
+    "UserId": "<2>",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z"
 }
@@ -146,7 +155,7 @@ _Response (201 - Created)_
     "id": 1,
     "title": "<Deadline Challange>",
     "category": "<Backlog>",
-    "UserId": "<4>",
+    "UserId": "<2>",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z"
 }
@@ -189,7 +198,7 @@ _Response (200)_
     "id": 1,
     "title": "<Deadline Challange Edit>",
     "category": "<Backlog Edit>",
-    "UserId": "<4>",
+    "UserId": "<2>",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z"
 }
@@ -232,7 +241,7 @@ _Response (200)_
     "id": 1,
     "title": "<Deadline Challange Edit>",
     "category": "<Backlog Edit>",
-    "UserId": "<4>",
+    "UserId": "<2>",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z"
 }
@@ -303,7 +312,8 @@ _Request Body_
 _Response (201)_
 ```
 {
-  "id": 1,
+  "id": 2,
+  "name": "Khairil",
   "email": "baril@gmail.com",
   "password": "$2b$10$Eq03uiQCB86/IxvwEiQlYuL/4zavUfMqZm8dGKRsoDvvREzVKhaiy",
   "organization": "Hacktiv8",
