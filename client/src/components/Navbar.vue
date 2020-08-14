@@ -29,23 +29,6 @@ export default {
     home () {
       this.$emit('home')
     },
-    getKanban() {
-      axios({
-          method: 'GET',
-          url: `http://localhost:3000/kanbans`,
-          headers: {
-              access_token: localStorage.access_token
-          }
-      })
-        .then(result => {
-            console.log(result, '<<<<<< di navbar');
-            this.user = 'adek'
-            console.log(user);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
   }
 }
 </script>

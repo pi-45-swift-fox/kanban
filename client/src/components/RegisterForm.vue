@@ -68,7 +68,7 @@ export default {
     register () {
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/register',
+        url: 'https://protected-hollows-86433.herokuapp.com/register',
         data: {
           email: this.user.email,
           password: this.user.password,

@@ -107,7 +107,7 @@ export default {
             console.log(this.user.password);
             axios({
                 method: 'POST',
-                url: `http://localhost:3000/login`,
+                url: `https://protected-hollows-86433.herokuapp.com/login`,
                 data: {
                     email: this.user.email,
                     password: this.user.password
@@ -129,7 +129,7 @@ export default {
             console.log(id_token)
             axios({
                 method: 'POST',
-                url: 'http://localhost:3000/googleLogin',
+                url: 'https://protected-hollows-86433.herokuapp.com/googleLogin',
                 data: {
                     id_token
                 }

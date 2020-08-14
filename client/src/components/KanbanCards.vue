@@ -56,7 +56,7 @@ export default {
             }
             axios({
                 method: 'PUT',
-                url: `http://localhost:3000/kanbans/move/${this.data.id}`,
+                url: `https://protected-hollows-86433.herokuapp.com/kanbans/move/${this.data.id}`,
                 headers: {
                     access_token: localStorage.access_token
                 },
@@ -90,7 +90,7 @@ export default {
             }
             axios({
                 method: 'PUT',
-                url: `http://localhost:3000/kanbans/move/${this.data.id}`,
+                url: `https://protected-hollows-86433.herokuapp.com/kanbans/move/${this.data.id}`,
                 headers: {
                     access_token: localStorage.access_token
                 },
@@ -124,7 +124,7 @@ export default {
                         if (result.value) {
                             axios({
                                 method: 'DELETE',
-                                url: `http://localhost:3000/kanbans/${id}`,
+                                url: `https://protected-hollows-86433.herokuapp.com/kanbans/${id}`,
                                 headers: {
                                     access_token: localStorage.access_token
                                 }

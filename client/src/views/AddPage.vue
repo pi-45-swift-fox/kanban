@@ -38,7 +38,7 @@ export default {
     add () {
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/kanbans',
+        url: 'https://protected-hollows-86433.herokuapp.com/kanbans',
         headers: {
           access_token: localStorage.access_token
         },

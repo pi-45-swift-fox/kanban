@@ -60,7 +60,7 @@ export default {
         edit() {
             axios({
                 method: 'PUT',
-                url: `http://localhost:3000/kanbans/${this.dapatSatu.id}`,
+                url: `https://protected-hollows-86433.herokuapp.com/kanbans/${this.dapatSatu.id}`,
                 headers: {
                     access_token: localStorage.access_token
                 },
@@ -86,7 +86,7 @@ export default {
         showEdit(id) {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/kanbans/${id}`,
+                url: `https://protected-hollows-86433.herokuapp.com/kanbans/${id}`,
                 headers: {
                     access_token: localStorage.access_token
                 }
@@ -102,7 +102,7 @@ export default {
         getOne(id) {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/kanbans/${id}`,
+                url: `https://protected-hollows-86433.herokuapp.com/kanbans/${id}`,
                 headers: {
                     access_token: localStorage.access_token
                 }
@@ -117,7 +117,7 @@ export default {
         getKanban() {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/kanbans`,
+                url: `https://protected-hollows-86433.herokuapp.com/kanbans`,
                 headers: {
                     access_token: localStorage.access_token
                 }
