@@ -90,7 +90,7 @@ export default {
                 password: '',
             },
             params: {
-                client_id: "975105577426-ljs094rm01u56v3relvr7a90j6150e7h.apps.googleusercontent.com"
+                client_id: "975105577426-uni3olhthmkruc2nc1qrimigi9p132hi.apps.googleusercontent.com"
             },
             renderParams: {
                 width: 150,
