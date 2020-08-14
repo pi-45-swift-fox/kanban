@@ -99,6 +99,8 @@ export default {
             showConfirmButton: false,
             timer: 2000,
           });
+
+          this.changePage();
         })
         .catch((error) => {
           if (error.response) {
