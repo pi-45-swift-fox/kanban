@@ -17,7 +17,7 @@ class googleAuth {
             payload = ticket.getPayload();    
             // console.log('ini>>>>>>>>>>>>>',payload['email'])
                     
-            return User.findOne({ where: { name: payload["email"] } })
+            return User.findOne({ where: { email: payload["email"] } })
         })
         .then(user => {
             console.log('ini user>>>>>>>',user)
@@ -27,7 +27,7 @@ class googleAuth {
             } else {
                 console.log('masuk else>>>>>>>>>')
             let dataUser = {
-                name: payload['email'],
+                email: payload['email'],
                 password: 'admin',
             }
             console.log('ini data userrr>>>>',dataUser)
@@ -35,10 +35,10 @@ class googleAuth {
             }
         })
         .then(data => {
-            let access_token = jwt.sign({ name: data.name },process.env.JWT_SECRET)
+            let access_token = jwt.sign({ email: data.email },process.env.JWT_SECRET)
 
             console.log(">>>>>>>.then(data)")
-            return res.status(200).json({ email:data.name,access_token })
+            return res.status(200).json({ email:data.email,access_token })
         })
         .catch(err => {
 
