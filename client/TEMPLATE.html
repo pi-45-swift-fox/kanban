@@ -1,0 +1,149 @@
+  <!-- <div class="min-h-full">
+        <div v-for="(task, index) in tasks" :key="index"></div>
+        <div class="flex bg-gray-500 justify-around bg-gray-500 mx-10 mt-20 ">
+            <div class="flex-1 text-gray-700 text-center bg-gray-400 mx-10 my-10 max-w-md CARDS">
+                <div v-bind:class="{'cards-header':true, [colors[index]]: true}">
+                    <div v-html=svgs[index]></div>
+                    <div class="cards-title font-bold text-xl mt-1">
+                        <h2>{{cardsTitle}}</h2>
+                    </div>
+                </div>
+                <div class="overflow-auto cards-body">
+                    <div  class="m-6 isi-cards">
+                        <div class="flex flex-col">
+                            <div class="font-bold text-xl mb-4">{{jobTitle.title}}</div>
+                        </div>
+                        <div class="bg-white mx-auto">
+                            Asigned to : {{jobTitle.User.name}}
+                        </div>
+                        <span
+                            class="mx-auto my-6 py-4 inline-block px-10 bg-gray-200 rounded-full text-sm font-semibold text-gray-700 ">
+                            Show Detail
+                        </span>
+                    </div>
+
+                    <div class="m-6 isi-cards">
+                        <div class="">
+                            <div class="flex flex-col">
+                                <div class="font-bold text-xl mb-4">Belajar Javascript</div>
+                            </div>
+                            <div class="bg-white mx-auto">
+                                Asigned to : firaz
+                            </div>
+                            <span
+                                class="mx-auto my-6 py-4 inline-block px-10 bg-gray-200 rounded-full text-sm font-semibold text-gray-700 ">
+                                Show Detail
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+    <div class="flex-1 text-gray-700 text-center bg-gray-400 mx-10 my-10 max-w-md CARDS">
+        <div :class="{'cards-header':true, [colors[index]]: true}">
+            <div v-html=svgs[index]></div>
+            <div class="cards-title font-bold text-xl mt-1">
+                <h2>{{cardTitle}}</h2>
+            </div>
+        </div>
+        <div class="overflow-auto cards-body">
+            <div class="m-6 isi-cards" v-for="(task, i) in tasks" :key="i">
+                <div class="flex flex-col" v-if="task.category == cardTitle">
+                    <div class="font-bold text-xl mb-4">{{task.title}}</div>
+                </div>
+                <div class="bg-white mx-auto">
+                    <!-- Asigned to : {{jobTitle.User.name}} -->
+                </div>
+                <span
+                    class="mx-auto my-6 py-4 inline-block px-10 bg-gray-200 rounded-full text-sm font-semibold text-gray-700 ">
+                    Show Detail
+                </span>
+            </div>
+
+            <div class="m-6 isi-cards">
+                <div class="">
+                    <div class="flex flex-col">
+                        <div class="font-bold text-xl mb-4">Belajar Javascript</div>
+                    </div>
+                    <div class="bg-white mx-auto">
+                        Asigned to : firaz
+                    </div>
+                    <span
+                        class="mx-auto my-6 py-4 inline-block px-10 bg-gray-200 rounded-full text-sm font-semibold text-gray-700 ">
+                        Show Detail
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- SECTION NAVBAR -->
+
+
+    <!-- SECTION CARDS -->
+
+
+
+
+
+<!-- const app = new Vue({
+    el: '#app',
+    data: {
+        cardsTitles: ['Back Log','To-Do', 'Current', 'Done'],
+        jobTitles : [
+                { "id": 1, "title": "Belajar Javascript", User: {
+                    name: 'Firaz'
+                }},
+                { "id": 2, "title": "Belajar Vue", User: {
+                    name: 'Grace'
+                }},
+                { "id": 3, "title": "Belajar REACT", User: {
+                    name: 'Isro'
+                }}
+            ],
+                colors : ['bg-yellow-300 hover:bg-yellow-500 hover:text-black','bg-red-300 hover:bg-red-400 hover:text-black','bg-green-300 hover:bg-green-500 hover:text-black', 'bg-blue-300 hover:bg-green-300 hover:text-black'],
+                // colorsHover: ['hover:bg-yellow-500 hover:text-black','hover:bg-red-400 hover:text-black','hover:bg-green-500 hover:text-black', 'hover:bg-green-300 hover:text-black'],
+                // svgColors : ["text-red-500", ]
+                svgs : [`<svg class="svg-icon mx-auto bi-card-list hover:text-blue-500 text-gray-600" width="5em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                <path fill-rule="evenodd"
+                    d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+                <circle cx="3.5" cy="5.5" r=".5" />
+                <circle cx="3.5" cy="8" r=".5" />
+                <circle cx="3.5" cy="10.5" r=".5" />
+                </svg>`, `<svg class="svg-icon mx-auto hover:text-blue-500 text-gray-600 bi bi-list-task" width="5em" viewBox="0 0 16 16"  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+                <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+                <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+            </svg>`, `<svg width="5em" viewBox="0 0 16 16" class="svg-icon mx-auto bi bi-list-ol" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"/>
+            <path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 0 1-.492.594v.033a.615.615 0 0 1 .569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 0 0-.342.338v.041zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635V5z"/>
+            </svg>`, `<svg width="5em" viewBox="0 0 16 16" class="svg-icon mx-auto bi-card-list hover:text-blue-500 text-gray-600 bi bi-list-task bi bi-check2-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+            <path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 0 0 3 14.5h10a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-1 0v5a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 0 0-1H3A1.5 1.5 0 0 0 1.5 3v10z"/>
+            </svg>`]
+    },
+    methods : {
+
+    }
+}) -->
