@@ -17,6 +17,7 @@
                     <textarea name="task" class="w-100" v-model="newTask"></textarea>
                     <br>
                     <button type="submit" class="btn btn-outline-info">Add</button>
+                    <button type="submit" class="btn btn-outline-danger" @click.prevent="back">Cancel</button>
                     </form>
                     </div>
                     <div class="addKanban" v-if="showAddTask == true">
@@ -52,6 +53,10 @@ export default {
         addTask(){
             this.showTask = true,
             this.showAddTask = false
+        },
+        back(){
+            this.showTask = false,
+            this.showAddTask = true
         },
         addNewTask(){
             Axios({

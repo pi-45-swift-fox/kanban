@@ -11801,6 +11801,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 var _default = {
   name: 'Category',
   props: ['filteredTasks', 'category', 'dbcategory', 'fetchTasks'],
@@ -11817,6 +11818,9 @@ var _default = {
   methods: {
     addTask: function addTask() {
       this.showTask = true, this.showAddTask = false;
+    },
+    back: function back() {
+      this.showTask = false, this.showAddTask = true;
     },
     addNewTask: function addNewTask() {
       var _this = this;
@@ -11946,6 +11950,21 @@ exports.default = _default;
                       attrs: { type: "submit" }
                     },
                     [_vm._v("Add")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-danger",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.back($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
                   )
                 ]
               )
@@ -12482,7 +12501,7 @@ exports.default = _default;
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "container mt-5 mb-5" }, [
+    _c("div", { staticClass: "container mt-2" }, [
       _c(
         "div",
         { staticClass: "row d-flex flex-row justify-content-between" },

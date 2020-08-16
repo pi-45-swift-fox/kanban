@@ -21,7 +21,7 @@
         </div>
         </nav>
     </div>
-    <div class="container mt-5 mb-5">
+    <div class="container mt-2">
         <div class="row d-flex flex-row justify-content-between">
             <CategoryList :category="'BACK LOG'" :dbcategory="'back log'" :filteredTasks="backlog" :fetch-tasks="fetchTasks"></CategoryList>            
             <CategoryList :category="'TODO'" :dbcategory="'todo'" :filteredTasks="todo" :fetch-tasks="fetchTasks"></CategoryList>            
