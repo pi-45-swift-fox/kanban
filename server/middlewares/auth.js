@@ -1,11 +1,11 @@
-const { User, Todo } = require('../models')
+const { User, Task } = require('../models')
 const jwt = require('jsonwebtoken')
 
 class auth {
     static async authentication(req, res, next) {
+        console.log('masuk otentikasi',req.headers.access_token);
         try {
             if (!req.headers.access_token) {
-                console.log('ada',req.headers.access_token);
                 res.status(500).json({
                     message: 'headers need access_token'
                 })
@@ -32,19 +32,21 @@ class auth {
     }
 
     static async authorization(req, res, next){
+        console.log('masuk otosasi')
         try {
             const id = +req.params.id
-            const todo = await Todo.findOne({
+            const task = await Task.findOne({
                 where: {
                     id
                 }
             })
-            if (req.userLogin.id !== todo.UserId) {
+            if (req.userLogin.id !== task.UserId) {
                 res.status(401).json('Not Authorized')
             } else {
                 next()
             }
         } catch (error) {
+            console.log(error);
             res.status(401).json('Not Authorized')
         }
     }

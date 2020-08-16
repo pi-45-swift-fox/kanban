@@ -10683,6 +10683,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
 var _default = {
   name: 'Login',
   data: function data() {
@@ -10690,6 +10694,11 @@ var _default = {
       email: '',
       password: ''
     };
+  },
+  mounted: function mounted() {
+    gapi.signin2.render('google-signin-button', {
+      onsuccess: this.onSignIn
+    });
   },
   methods: {
     login: function login() {
@@ -10716,6 +10725,9 @@ var _default = {
     },
     showRegister: function showRegister() {
       this.$emit('changePage', 'register-page');
+    },
+    onSignIn: function onSignIn(user) {
+      var profile = user.getBasicProfile();
     }
   }
 };
@@ -10834,7 +10846,13 @@ exports.default = _default;
               _c("br"),
               _c("br"),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(3),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-center text-sm text-muted" }, [
+                _vm._v("Or login with Google account")
+              ]),
+              _vm._v(" "),
+              _vm._m(4)
             ])
           ]
         )
@@ -10884,10 +10902,25 @@ var staticRenderFns = [
     return _c("div", { staticClass: "mx-auto w-25" }, [
       _c(
         "button",
-        { staticClass: "btn btn-secondary", attrs: { type: "submit" } },
+        { staticClass: "btn btn-outline-secondary", attrs: { type: "submit" } },
         [_vm._v("Login")]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "mx-auto", staticStyle: { width: "120px" } },
+      [
+        _c("div", {
+          staticClass: "g-signin2",
+          attrs: { id: "google-signin-button" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -11256,16 +11289,36 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   name: 'card',
-  props: ['filteredTask'],
+  props: ['filteredTask', 'fetchTasks'],
   data: function data() {
-    return {// createdAt: filteredTask.createdAt, 
-      // time: `${createdAt.getDate()}-${createdAt.getMonth()}-${createdAt.getFullYear()} ${createdAt.getHours()}:${createdAt.getMinutes()} `
+    return {
+      newTitle: '',
+      errorStatus: ''
     };
   },
+  destroyed: function destroyed() {},
   methods: {
     editCategory: function editCategory(category, id) {
+      var _this = this;
+
       (0, _axios.default)({
         method: 'PATCH',
         url: "http://localhost:3000/tasks/".concat(id, "/category"),
@@ -11276,10 +11329,55 @@ var _default = {
           category: category
         }
       }).then(function () {
-        // this.$emit('fetchTasks')
+        _this.fetchTasks();
+
         console.log('berhasil move');
       }).catch(function (err) {
         console.log(err);
+      });
+    },
+    deleteTask: function deleteTask(id) {
+      var _this2 = this;
+
+      console.log(id);
+      (0, _axios.default)({
+        method: 'DELETE',
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          access_token: localStorage.access_token
+        }
+      }).then(function (result) {
+        _this2.fetchTasks();
+
+        console.log('berhasil', result.data);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    updateTitle: function updateTitle(id) {
+      var _this3 = this;
+
+      (0, _axios.default)({
+        method: 'PATCH',
+        url: "http://localhost:3000/tasks/".concat(id, "/title"),
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          title: this.newTitle
+        }
+      }).then(function () {
+        _this3.fetchTasks();
+
+        console.log('berhasil update title');
+      }).catch(function (err) {
+        // if (!err.response) {
+        // // network error
+        //     this.errorStatus = 'Error: Network Error';
+        // } else {
+        //     this.errorStatus = err.response.data.message;
+        // }
+        console.log('error==>', err);
       });
     }
   }
@@ -11298,7 +11396,7 @@ exports.default = _default;
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card-body" }, [
-    _c("div", { staticClass: "float-right" }, [
+    _c("div", { staticClass: "input-group justify-content-end " }, [
       _c("small", [
         _c(
           "svg",
@@ -11323,19 +11421,88 @@ exports.default = _default;
           ]
         ),
         _vm._v(" "),
-        _vm._m(0)
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal1",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.updateTitle(_vm.filteredTask.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newTitle,
+                              expression: "newTitle"
+                            }
+                          ],
+                          staticClass: "w-100 h-100",
+                          attrs: { name: "task", id: "" },
+                          domProps: { value: _vm.newTitle },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newTitle = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
       ]),
-      _vm._v(" "),
+      _vm._v("\n         \n        "),
       _c("small", [
         _c(
           "svg",
           {
             staticClass: "delete",
             attrs: {
+              type: "button",
               xmlns: "http://www.w3.org/2000/svg",
               width: "15",
               height: "15",
               viewBox: "0 0 24 24"
+            },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.deleteTask(_vm.filteredTask.id)
+              }
             }
           },
           [
@@ -11348,89 +11515,162 @@ exports.default = _default;
           ]
         )
       ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "nav-item dropdown loat-right" }, [
+      _vm._v("\n         \n        "),
+      _c("div", { staticClass: "input-group-append" }, [
         _c(
-          "a",
+          "small",
           {
-            staticClass: "nav-link dropdown-toggle ",
-            staticStyle: { color: "rgb(250, 234, 234)" },
+            staticClass: "dropdown-toggle",
             attrs: {
-              href: "#",
-              id: "navbarDropdown",
-              role: "button",
               "data-toggle": "dropdown",
               "aria-haspopup": "true",
               "aria-expanded": "false"
             }
           },
           [
-            _c("small", [
-              _c(
-                "svg",
-                {
-                  staticClass: "move",
+            _c(
+              "svg",
+              {
+                staticClass: "move",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  width: "15",
+                  height: "15",
+                  viewBox: "0 0 24 24"
+                }
+              },
+              [
+                _c("path", {
                   attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "15",
-                    height: "15",
-                    viewBox: "0 0 24 24"
+                    d:
+                      "M10.024 4h6.015l7.961 8-7.961 8h-6.015l7.961-8-7.961-8zm-10.024 16h6.015l7.961-8-7.961-8h-6.015l7.961 8-7.961 8z"
                   }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M10.024 4h6.015l7.961 8-7.961 8h-6.015l7.961-8-7.961-8zm-10.024 16h6.015l7.961-8-7.961-8h-6.015l7.961 8-7.961 8z"
-                    }
-                  })
-                ]
-              )
-            ])
+                })
+              ]
+            )
           ]
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "dropdown-menu",
-            attrs: { "aria-labelledby": "navbarDropdown" }
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "dropdown-item",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.editCategory("todo", _vm.filteredTask.id)
-                  }
-                }
-              },
-              [_vm._v("Move to To Do")]
-            )
-          ]
-        )
-      ]),
-      _c("br"),
-      _c("br"),
-      _vm._v(" "),
-      _c("h5", { staticClass: "card-title" }, [
-        _vm._v(_vm._s(_vm.filteredTask.title))
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [
-        _c("small", { staticClass: "text-muted" }, [
-          _vm._v("By: " + _vm._s(_vm.filteredTask.User["email"]))
+        _c("div", { staticClass: "dropdown-menu" }, [
+          _vm.filteredTask.category == "back log"
+            ? _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.editCategory("todo", _vm.filteredTask.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Move to To Do")]
+                )
+              ])
+            : _vm.filteredTask.category == "todo"
+            ? _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.editCategory("back log", _vm.filteredTask.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Move to Back Log")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.editCategory("doing", _vm.filteredTask.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Move to Doing")]
+                )
+              ])
+            : _vm.filteredTask.category == "doing"
+            ? _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.editCategory("todo", _vm.filteredTask.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Move to To Do")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.editCategory(
+                          "completed",
+                          _vm.filteredTask.id
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v("Move to Completed")]
+                )
+              ])
+            : _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.editCategory("doing", _vm.filteredTask.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Move to Doing")]
+                )
+              ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [
-        _c("small", { staticClass: "text-muted" }, [
-          _vm._v(_vm._s(_vm.filteredTask.createdAt))
-        ])
+      ])
+    ]),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("h5", { staticClass: "card-title  mt-0" }, [
+      _vm._v(_vm._s(_vm.filteredTask.title))
+    ]),
+    _vm._v(" "),
+    _c("p", { staticClass: "card-text" }, [
+      _c("small", { staticClass: "text-muted" }, [
+        _vm._v("By: " + _vm._s(_vm.filteredTask.User["email"]))
+      ])
+    ]),
+    _vm._v(" "),
+    _c("p", { staticClass: "card-text" }, [
+      _c("small", { staticClass: "text-muted" }, [
+        _vm._v(_vm._s(new Date(_vm.filteredTask.createdAt).toDateString()))
       ])
     ])
   ])
@@ -11440,80 +11680,47 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "exampleModal1",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "exampleModalLabel" }
-                  },
-                  [_vm._v("Edit Task")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("textarea", {
-                  staticClass: "w-100 h-100",
-                  attrs: { name: "task", id: "" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                  [_vm._v("Save changes")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Edit Task")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Save changes")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -11594,89 +11801,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   name: 'Category',
-  props: ['filteredTasks', 'category', 'dbcategory'],
+  props: ['filteredTasks', 'category', 'dbcategory', 'fetchTasks'],
   components: {
     CategoryCard: _CategoryCard.default
   },
@@ -11705,7 +11832,8 @@ var _default = {
           category: this.dbcategory
         }
       }).then(function (result) {
-        _this.showTask = false, _this.showAddTask = true, console.log('berhasil', result.data);
+        _this.showTask = false, _this.showAddTask = true, _this.fetchTasks();
+        console.log('berhasil', result.data);
       }).catch(function (err) {
         console.log(err);
       });
@@ -11725,7 +11853,7 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-3 col-sm-6 col-6" }, [
+  return _c("div", { staticClass: "col-md-3 col-sm-6 col-12" }, [
     _c("div", { staticClass: " card d-flex flex-column bd-highlight mb-3" }, [
       _c(
         "div",
@@ -11760,8 +11888,10 @@ exports.default = _default;
             { key: filteredTask.id, staticClass: "card m-3" },
             [
               _c("CategoryCard", {
-                attrs: { filteredTask: filteredTask },
-                on: { fetchTasks: _vm.fetchTasks }
+                attrs: {
+                  filteredTask: filteredTask,
+                  "fetch-tasks": _vm.fetchTasks
+                }
               })
             ],
             1
@@ -11811,7 +11941,10 @@ exports.default = _default;
                   _vm._v(" "),
                   _c(
                     "button",
-                    { staticClass: "btn btn-info", attrs: { type: "submit" } },
+                    {
+                      staticClass: "btn btn-outline-info",
+                      attrs: { type: "submit" }
+                    },
                     [_vm._v("Add")]
                   )
                 ]
@@ -12203,7 +12336,6 @@ var _default = {
   },
   data: function data() {
     return {
-      newBackLog: '',
       tasks: [],
       panggilan: localStorage.panggilan
     };
@@ -12236,25 +12368,8 @@ var _default = {
       this.$emit('changePage', 'login-page');
       localStorage.clear();
     },
-    addNewBacklog: function addNewBacklog() {
-      var _this = this;
-
-      (0, _axios.default)({
-        method: 'POST',
-        url: 'http://localhost:3000/tasks',
-        data: {
-          title: this.newBackLog,
-          category: 'back log'
-        }
-      }).then(function (result) {
-        _this.showBacklog = false, _this.showAddToBacklog = true;
-        console.log('berhasil', result.data);
-      }).catch(function (err) {
-        console.log('error', err);
-      });
-    },
     fetchTasks: function fetchTasks() {
-      var _this2 = this;
+      var _this = this;
 
       (0, _axios.default)({
         method: 'GET',
@@ -12263,10 +12378,7 @@ var _default = {
           access_token: localStorage.access_token
         }
       }).then(function (result) {
-        _this2.tasks = result.data;
-
-        _this2.fetchTasks();
-
+        _this.tasks = result.data;
         console.log('berhasil', result.data);
       }).catch(function (err) {
         console.log('error', err);
@@ -12379,36 +12491,36 @@ exports.default = _default;
             attrs: {
               category: "BACK LOG",
               dbcategory: "back log",
-              filteredTasks: _vm.backlog
-            },
-            on: { fetchTasks: _vm.fetchTasks }
+              filteredTasks: _vm.backlog,
+              "fetch-tasks": _vm.fetchTasks
+            }
           }),
           _vm._v(" "),
           _c("CategoryList", {
             attrs: {
               category: "TODO",
               dbcategory: "todo",
-              filteredTasks: _vm.todo
-            },
-            on: { fetchTasks: _vm.fetchTasks }
+              filteredTasks: _vm.todo,
+              "fetch-tasks": _vm.fetchTasks
+            }
           }),
           _vm._v(" "),
           _c("CategoryList", {
             attrs: {
               category: "DOING",
               dbcategory: "doing",
-              filteredTasks: _vm.doing
-            },
-            on: { fetchTasks: _vm.fetchTasks }
+              filteredTasks: _vm.doing,
+              "fetch-tasks": _vm.fetchTasks
+            }
           }),
           _vm._v(" "),
           _c("CategoryList", {
             attrs: {
               category: "COMPLETED",
               dbcategory: "completed",
-              filteredTasks: _vm.completed
-            },
-            on: { fetchTasks: _vm.fetchTasks }
+              filteredTasks: _vm.completed,
+              "fetch-tasks": _vm.fetchTasks
+            }
           })
         ],
         1
@@ -12518,9 +12630,12 @@ var _default = {
       this.isLogin = data;
     },
     created: function created() {
-      if (localStorage.access_token) {
+      if (localStorage.getItem('access_token')) {
         this.page = 'kanban-home-page';
         this.isLogin = true;
+      } else {
+        this.page = 'login-page';
+        this.isLogin = false;
       }
     }
   }
@@ -12705,7 +12820,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61612" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55816" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

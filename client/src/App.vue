@@ -34,9 +34,12 @@ export default {
             this.isLogin = data
         },
         created(){
-            if(localStorage.access_token){
+            if(localStorage.getItem('access_token')){
                 this.page = 'kanban-home-page'
                 this.isLogin = true
+            } else {
+                this.page = 'login-page'
+                this.isLogin = false
             }
         }
     }

@@ -23,10 +23,10 @@
     </div>
     <div class="container mt-5 mb-5">
         <div class="row d-flex flex-row justify-content-between">
-            <CategoryList :category="'BACK LOG'" :dbcategory="'back log'" :filteredTasks="backlog" @fetchTasks="fetchTasks"></CategoryList>            
-            <CategoryList :category="'TODO'" :dbcategory="'todo'" :filteredTasks="todo" @fetchTasks="fetchTasks"></CategoryList>            
-            <CategoryList :category="'DOING'" :dbcategory="'doing'" :filteredTasks="doing" @fetchTasks="fetchTasks"></CategoryList>            
-            <CategoryList :category="'COMPLETED'" :dbcategory="'completed'" :filteredTasks="completed" @fetchTasks="fetchTasks"></CategoryList>            
+            <CategoryList :category="'BACK LOG'" :dbcategory="'back log'" :filteredTasks="backlog" :fetch-tasks="fetchTasks"></CategoryList>            
+            <CategoryList :category="'TODO'" :dbcategory="'todo'" :filteredTasks="todo" :fetch-tasks="fetchTasks"></CategoryList>            
+            <CategoryList :category="'DOING'" :dbcategory="'doing'" :filteredTasks="doing" :fetch-tasks="fetchTasks"></CategoryList>            
+            <CategoryList :category="'COMPLETED'" :dbcategory="'completed'" :filteredTasks="completed" :fetch-tasks="fetchTasks"></CategoryList>            
             <!-- <div class="col-md-3 col-sm-6 col-6">
                 <div class=" card d-flex flex-column bd-highlight mb-3">
                     <div class="card header bg-dark badge badge-primary text-wrap font-bold" style="height: 40px;">
@@ -297,7 +297,6 @@ export default {
         },
         data(){
             return {
-            newBackLog: '',
             tasks: [],
             panggilan: localStorage.panggilan,
             }
@@ -330,23 +329,6 @@ export default {
             this.$emit('changePage', 'login-page')
             localStorage.clear()
             },
-            addNewBacklog(){
-                axios({
-                    method: 'POST',
-                    url: 'http://localhost:3000/tasks',
-                    data: {
-                        title: this.newBackLog,
-                        category: 'back log'
-                    }
-                })
-                .then((result) => {     
-                    this.showBacklog = false,
-                    this.showAddToBacklog = true
-                    console.log('berhasil', result.data)
-                }).catch((err) => {
-                    console.log('error', err)
-                });
-            },
             fetchTasks(){
                 axios({
                     method: 'GET',
@@ -357,7 +339,6 @@ export default {
                 })
                 .then((result) => {                         
                     this.tasks = result.data
-                    this.fetchTasks()
                     console.log('berhasil', result.data)
                 }).catch((err) => {
                     console.log('error', err)

@@ -57,12 +57,12 @@ class taskController {
         }
     }
 
-    static async update(req, res, next){
+    static async updateTitle(req, res, next){
         try {
             const id = +req.params.id
-            const {title, category} = req.body
+            const {title} = req.body
             const willUpdate = await Task.update({
-                title, category
+                title
             },{
                 where: {
                     id
@@ -77,6 +77,7 @@ class taskController {
     static async delete(req, res, next){
         try {
             const id = +req.params.id
+            console.log('masuk', id);
             const willDelete = await Task.destroy({
                 where: {
                     id
@@ -91,7 +92,7 @@ class taskController {
     static async updateCategory(req, res, next){
         try {
             const id = +req.params.id
-            const category = req.body
+            const { category } = req.body
             const newCategory = await Task.update({
                 category
             }, {

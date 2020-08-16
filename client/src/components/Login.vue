@@ -13,7 +13,11 @@
                         <a href="#" @click.prevent="showRegister">Haven't an account register here</a>
                         <br><br>
                         <div class="mx-auto w-25">
-                            <button type="submit" class="btn btn-secondary">Login</button>
+                            <button type="submit" class="btn btn-outline-secondary">Login</button>
+                        </div>
+                        <p class="text-center text-sm text-muted">Or login with Google account</p>
+                        <div class="mx-auto" style="width: 120px">
+                        <div id="google-signin-button" class="g-signin2"></div>
                         </div>
                     </div>
                 </form>
@@ -32,6 +36,11 @@ export default {
             email: '',
             password: '',
         }
+    },
+    mounted() {
+    gapi.signin2.render('google-signin-button', {
+      onsuccess: this.onSignIn
+    })
     },
     methods: {
         login(){
@@ -56,6 +65,9 @@ export default {
         showRegister(){
             this.$emit('changePage', 'register-page')
         },
+        onSignIn (user) {
+        const profile = user.getBasicProfile()
+        }
     }
 
 }
