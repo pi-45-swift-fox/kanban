@@ -56,8 +56,8 @@ class UserController {
                 const check = bcrypt.compareSync(password, user.password)
 
                 if(check){
-                    const token = jwt.sign({email : user.email, role : user.role}, process.env.JWT_SECRET)
-                    res.status(200).json(token)
+                    const token = jwt.sign({email : user.email}, process.env.JWT_SECRET)
+                    res.status(200).json({access_token: token})
                 } else {
                     next({name: 'Invalid Request', message: 'You have registered user in server, please login to server again in page'})
                 }
@@ -69,8 +69,8 @@ class UserController {
                     password,
                     role: 'reader'
                 })
-                const token = jwt.sign({email : newUser.email, role : newUser.role}, process.env.JWT_SECRET)
-                res.status(200).json(token)
+                const token = jwt.sign({email : newUser.email}, process.env.JWT_SECRET)
+                res.status(200).json({access_token: token})
             }
             res.status(200).json({
                 msg: 'Sudah didaftar di server'

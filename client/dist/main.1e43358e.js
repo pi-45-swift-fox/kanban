@@ -10305,7 +10305,60 @@ module.exports.default = axios;
 
 },{"./utils":"node_modules/axios/lib/utils.js","./helpers/bind":"node_modules/axios/lib/helpers/bind.js","./core/Axios":"node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"node_modules/axios/lib/core/mergeConfig.js","./defaults":"node_modules/axios/lib/defaults.js","./cancel/Cancel":"node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"node_modules/axios/lib/helpers/spread.js"}],"node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"node_modules/axios/lib/axios.js"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./lib/axios":"node_modules/axios/lib/axios.js"}],"node_modules/vue-google-signin-button-directive/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _vue = _interopRequireDefault(require("vue"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = _vue.default.directive('google-signin-button', {
+  bind: function (el, binding, vnode) {
+    CheckComponentMethods();
+    let clientId = binding.value;
+    let googleSignInAPI = document.createElement('script');
+    googleSignInAPI.setAttribute('src', 'https://apis.google.com/js/api:client.js');
+    document.head.appendChild(googleSignInAPI);
+    googleSignInAPI.onload = InitGoogleButton;
+
+    function InitGoogleButton() {
+      gapi.load('auth2', () => {
+        const auth2 = gapi.auth2.init({
+          client_id: clientId,
+          cookiepolicy: 'single_host_origin'
+        });
+        auth2.attachClickHandler(el, {}, OnSuccess, Onfail);
+      });
+    }
+
+    function OnSuccess(googleUser) {
+      vnode.context.OnGoogleAuthSuccess(googleUser.getAuthResponse().id_token);
+      googleUser.disconnect();
+    }
+
+    function Onfail(error) {
+      vnode.context.OnGoogleAuthFail(error);
+    }
+
+    function CheckComponentMethods() {
+      if (!vnode.context.OnGoogleAuthSuccess) {
+        throw new Error('The method OnGoogleAuthSuccess must be defined on the component');
+      }
+
+      if (!vnode.context.OnGoogleAuthFail) {
+        throw new Error('The method OnGoogleAuthFail must be defined on the component');
+      }
+    }
+  }
+});
+
+exports.default = _default;
+},{"vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -10657,6 +10710,8 @@ exports.default = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _vueGoogleSigninButtonDirective = _interopRequireDefault(require("vue-google-signin-button-directive"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //
@@ -10690,10 +10745,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = {
   name: 'Login',
   props: ['baseUrl'],
+  directives: {
+    GoogleSignInButton: _vueGoogleSigninButtonDirective.default
+  },
   data: function data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      clientId: '568139109973-i3cal2fhs8l8i27kddanv7o6de54egfb.apps.googleusercontent.com'
     };
   },
   mounted: function mounted() {
@@ -10727,8 +10786,21 @@ var _default = {
     showRegister: function showRegister() {
       this.$emit('changePage', 'register-page');
     },
-    onSignIn: function onSignIn(user) {
-      var profile = user.getBasicProfile();
+    onGoogleAuthSuccess: function onGoogleAuthSuccess(idToken) {
+      (0, _axios.default)({
+        method: 'POST',
+        url: "".concat(this.baseUrl, "/google-login"),
+        headers: {
+          google_token: idToken
+        }
+      }).then(function (result) {
+        localStorage.setItem('access_token', result.access_token);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    onGoogleAuthFail: function onGoogleAuthFail(error) {
+      console.log(error);
     }
   }
 };
@@ -10853,7 +10925,23 @@ exports.default = _default;
                 _vm._v("Or login with Google account")
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _c(
+                "div",
+                { staticClass: "mx-auto", staticStyle: { width: "120px" } },
+                [
+                  _c("div", {
+                    directives: [
+                      {
+                        name: "google-signin-button",
+                        rawName: "v-google-signin-button",
+                        value: _vm.clientId,
+                        expression: "clientId"
+                      }
+                    ],
+                    staticClass: "g-signin2"
+                  })
+                ]
+              )
             ])
           ]
         )
@@ -10907,21 +10995,6 @@ var staticRenderFns = [
         [_vm._v("Login")]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "mx-auto", staticStyle: { width: "120px" } },
-      [
-        _c("div", {
-          staticClass: "g-signin2",
-          attrs: { id: "google-signin-button" }
-        })
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -10956,7 +11029,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/Register.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","vue-google-signin-button-directive":"node_modules/vue-google-signin-button-directive/index.js","_css_loader":"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/Register.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12519,7 +12592,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63397" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63996" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

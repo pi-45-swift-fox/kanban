@@ -17,7 +17,7 @@
                         </div>
                         <p class="text-center text-sm text-muted">Or login with Google account</p>
                         <div class="mx-auto" style="width: 120px">
-                        <div id="google-signin-button" class="g-signin2"></div>
+                        <div v-google-signin-button="clientId" class="g-signin2"></div>
                         </div>
                     </div>
                 </form>
@@ -28,14 +28,19 @@
 
 <script>
 import axios from 'axios';
+import GoogleSignInButton from 'vue-google-signin-button-directive'
 
 export default {
     name: 'Login',
     props: ['baseUrl'],
+    directives: {
+        GoogleSignInButton
+    },
     data(){
         return {
             email: '',
             password: '',
+            clientId: '568139109973-i3cal2fhs8l8i27kddanv7o6de54egfb.apps.googleusercontent.com'
         }
     },
     mounted() {
@@ -66,8 +71,22 @@ export default {
         showRegister(){
             this.$emit('changePage', 'register-page')
         },
-        onSignIn (user) {
-        const profile = user.getBasicProfile()
+        onGoogleAuthSuccess (idToken) {
+            axios({
+                method: 'POST',
+                url: `${this.baseUrl}/google-login`,
+                headers: {
+                    google_token: idToken
+                }
+            })
+            .then((result) => {
+                localStorage.setItem('access_token', result.access_token)
+            }).catch((err) => {
+                console.log(err);
+            });
+        },
+        onGoogleAuthFail(error){
+            console.log(error);
         }
     }
 
