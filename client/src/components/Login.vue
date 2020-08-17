@@ -43,11 +43,6 @@ export default {
             clientId: '568139109973-i3cal2fhs8l8i27kddanv7o6de54egfb.apps.googleusercontent.com'
         }
     },
-    mounted() {
-    gapi.signin2.render('google-signin-button', {
-      onsuccess: this.onSignIn
-    })
-    },
     methods: {
         login(){
             axios({
@@ -59,6 +54,7 @@ export default {
                 }
             })
             .then((result) => {
+                this.$emit('showAlertSuccess', result.data.panggilan + ' Logged In')       
                 this.$emit('changeLogin', true)
                 this.$emit('changePage', 'kanban-home-page')
                 localStorage.access_token = result.data.access_token
@@ -66,12 +62,13 @@ export default {
                 console.log(result.data);   
             }).catch((err) => {
                 console.log('error', err);
+                this.$emit('showAlert', err)
             });
         },
         showRegister(){
             this.$emit('changePage', 'register-page')
         },
-        onGoogleAuthSuccess (idToken) {
+        OnGoogleAuthSuccess(idToken) {
             axios({
                 method: 'POST',
                 url: `${this.baseUrl}/google-login`,
@@ -80,13 +77,20 @@ export default {
                 }
             })
             .then((result) => {
-                localStorage.setItem('access_token', result.access_token)
+                this.$emit('changeLogin', true)
+                this.$emit('changePage', 'kanban-home-page')
+                localStorage.access_token = result.data.access_token
+                localStorage.panggilan = result.data.panggilan
+                this.$emit('showAlertSuccess', `${result.data.panggilan} Logged In`)    
+                console.log(result);
             }).catch((err) => {
                 console.log(err);
+                this.$emit('showAlert', err)
             });
         },
-        onGoogleAuthFail(error){
+        OnGoogleAuthFail(error){
             console.log(error);
+            this.$emit('showAlert', error)
         }
     }
 

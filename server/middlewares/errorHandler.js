@@ -12,9 +12,9 @@ function errorHandler(err, req, res, next) {
     } else if(err.name === 'Error Not Found'){
         status = 404
         errCode = err.name
-        message = err. message
+        message = err.message
     }
-    console.log(err.message);
+    console.log({errCode, message});
     res.status(status).json({errCode, message})
 }
 module.exports = errorHandler

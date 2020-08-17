@@ -8,7 +8,7 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3" style="overflow-y:scroll; overflow-x:hidden; height:400px; background-color: rgba(0,0,0,.03);" >
                 <div class="card m-3" v-for="filteredTask in filteredTasks" :key= filteredTask.id>    
-                    <CategoryCard :filteredTask="filteredTask" :fetch-tasks="fetchTasks" :base-url="baseUrl"></CategoryCard>
+                    <CategoryCard :filteredTask="filteredTask" :fetch-tasks="fetchTasks" :base-url="baseUrl" :show-alert="showAlert"></CategoryCard>
                 </div>
                 </div>
                 <div class="card-footer">
@@ -37,7 +37,7 @@ import Axios from 'axios'
 
 export default {
     name: 'Category',
-    props: ['filteredTasks', 'category', 'dbcategory', 'fetchTasks', 'baseUrl'],
+    props: ['filteredTasks', 'category', 'dbcategory', 'fetchTasks', 'baseUrl', 'showAlert'],
     components: {
         CategoryCard
     },
@@ -73,11 +73,13 @@ export default {
             .then(result => {
                 this.showTask = false,
                 this.showAddTask = true,
+                this.$emit('showAlertSuccess', ' Success Added')  
                 this.fetchTasks()
                 console.log('berhasil', result.data);    
             })
             .catch(err => {
                 console.log(err);
+                this.$emit('showAlert', err.message)
             })
         }
     }

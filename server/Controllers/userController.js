@@ -35,7 +35,7 @@ class UserController {
             })
             res.status(201).json(`User with email ${email} created`)
         } catch (error) {
-            next({name: 'Invalid Request', message: 'Invalid Request'})
+            next(error)
         }
     }
 
@@ -57,7 +57,8 @@ class UserController {
 
                 if(check){
                     const token = jwt.sign({email : user.email}, process.env.JWT_SECRET)
-                    res.status(200).json({access_token: token})
+                    const panggilan = user.email.split('@')          
+                    res.status(200).json({access_token: token, panggilan: panggilan[0]})
                 } else {
                     next({name: 'Invalid Request', message: 'You have registered user in server, please login to server again in page'})
                 }
@@ -70,7 +71,8 @@ class UserController {
                     role: 'reader'
                 })
                 const token = jwt.sign({email : newUser.email}, process.env.JWT_SECRET)
-                res.status(200).json({access_token: token})
+                const panggilan = newUser.email.split('@')          
+                res.status(200).json({access_token: token, panggilan: panggilan[0]})
             }
             res.status(200).json({
                 msg: 'Sudah didaftar di server'

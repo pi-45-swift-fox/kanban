@@ -23,10 +23,10 @@
     </div>
     <div class="container mt-2">
         <div class="row d-flex flex-row justify-content-between">
-            <CategoryList :category="'BACK LOG'" :dbcategory="'back log'" :filteredTasks="backlog" :fetch-tasks="fetchTasks" :base-url="baseUrl"></CategoryList>            
-            <CategoryList :category="'TODO'" :dbcategory="'todo'" :filteredTasks="todo" :fetch-tasks="fetchTasks" :base-url="baseUrl"></CategoryList>            
-            <CategoryList :category="'DOING'" :dbcategory="'doing'" :filteredTasks="doing" :fetch-tasks="fetchTasks" :base-url="baseUrl"></CategoryList>            
-            <CategoryList :category="'COMPLETED'" :dbcategory="'completed'" :filteredTasks="completed" :fetch-tasks="fetchTasks" :base-url="baseUrl"></CategoryList>            
+            <CategoryList :category="'BACK LOG'" :dbcategory="'back log'" :filteredTasks="backlog" :fetch-tasks="fetchTasks" :base-url="baseUrl" @showAlert="showAlert" @showAlertSuccess="showAlertSuccess"></CategoryList>            
+            <CategoryList :category="'TODO'" :dbcategory="'todo'" :filteredTasks="todo" :fetch-tasks="fetchTasks" :base-url="baseUrl" @showAlert="showAlert" @showAlertSuccess="showAlertSuccess"></CategoryList>            
+            <CategoryList :category="'DOING'" :dbcategory="'doing'" :filteredTasks="doing" :fetch-tasks="fetchTasks" :base-url="baseUrl" @showAlert="showAlert" @showAlertSuccess="showAlertSuccess"></CategoryList>            
+            <CategoryList :category="'COMPLETED'" :dbcategory="'completed'" :filteredTasks="completed" :fetch-tasks="fetchTasks" :base-url="baseUrl" @showAlert="showAlert" @showAlertSuccess="showAlertSuccess"></CategoryList>            
         </div>
     </div>    
   </div>
@@ -38,7 +38,7 @@ import CategoryList from './CategoryList.vue'
 
 export default {
         name: 'Kanban-home-page',
-        props: ['baseUrl'],
+        props: ['baseUrl','showAlert'],
         components: {
             CategoryList
         },
@@ -89,6 +89,7 @@ export default {
                     console.log('berhasil', result.data)
                 }).catch((err) => {
                     console.log('error', err)
+                    this.$emit('showAlert', err.message)
                 });
             }
         },

@@ -58,7 +58,7 @@ import axios from 'axios'
 
 export default {
     name: 'card',
-    props: ['filteredTask', 'fetchTasks', 'baseUrl'],
+    props: ['filteredTask', 'fetchTasks', 'baseUrl', 'showAlert'],
     data(){
         return{
             newTitle: '',
@@ -85,6 +85,7 @@ export default {
                 console.log('berhasil move');
             }).catch((err) => {
                 console.log(err);
+                this.$emit('showAlert', err.message)
             });
         },
         deleteTask(id){
@@ -101,7 +102,8 @@ export default {
                 console.log('berhasil', result.data)
             })
             .catch((err) => {
-                    console.log(err);
+                console.log(err);
+                this.$emit('showAlert', err.message)
             });
         },
         updateTitle(id){
@@ -119,7 +121,8 @@ export default {
                 this.fetchTasks()
                 console.log('berhasil update title');
             }).catch((err) => {
-                    console.log('error==>',err);
+                console.log('error==>',err);
+                this.$emit('showAlert', err.message)
             });
         }
     }

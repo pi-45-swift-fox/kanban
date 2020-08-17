@@ -32,7 +32,7 @@ import axios from 'axios'
 
 export default {
     name: 'Register',
-    props: ['baseUrl'],
+    props: ['baseUrl','showAlert'],
     data(){
         return {
             emailRegister: '',
@@ -51,10 +51,12 @@ export default {
             })
             .then((result) => {  
                 this.$emit('changeLogin', false)
-                this.$emit('changePage', 'login-page')   
+                this.$emit('changePage', 'login-page')
+                this.$emit('showAlertSuccess', result.data)  
                 console.log('berhasil', result.data)
             }).catch((err) => {
                 console.log('error', err)
+                this.$emit('showAlert', err)
             });
         },
         backLogin(){
