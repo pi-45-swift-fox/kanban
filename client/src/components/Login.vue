@@ -31,6 +31,7 @@ import axios from 'axios';
 
 export default {
     name: 'Login',
+    props: ['baseUrl'],
     data(){
         return {
             email: '',
@@ -46,7 +47,7 @@ export default {
         login(){
             axios({
                 method: 'POST',
-                url: 'http://localhost:3000/login',
+                url: `${this.baseUrl}/login`,
                 data: {
                     email: this.email,
                     password: this.password

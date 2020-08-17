@@ -32,6 +32,7 @@ import axios from 'axios'
 
 export default {
     name: 'Register',
+    props: ['baseUrl'],
     data(){
         return {
             emailRegister: '',
@@ -42,7 +43,7 @@ export default {
         register(){
             axios({
                 method: 'POST',
-                url: 'http://localhost:3000/register',
+                url: `${this.baseUrl}/register`,
                 data: {
                     email: this.emailRegister,
                     password: this.passwordRegister

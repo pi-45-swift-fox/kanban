@@ -1,8 +1,8 @@
 <template>
     <div>
-    <Login v-if="page === 'login-page'" @changeLogin="changeLogin" @changePage="changePage"></Login>    
-    <Register v-else-if="page === 'register-page'" @changeLogin="changeLogin" @changePage="changePage" ></Register>
-    <Dashboard v-else-if="page === 'kanban-home-page'"  @changeLogin="changeLogin" @changePage="changePage"></Dashboard>
+    <Login v-if="page === 'login-page'" @changeLogin="changeLogin" @changePage="changePage" :base-url="baseUrl"></Login>    
+    <Register v-else-if="page === 'register-page'" @changeLogin="changeLogin" @changePage="changePage" :base-url="baseUrl"></Register>
+    <Dashboard v-else-if="page === 'kanban-home-page'"  @changeLogin="changeLogin" @changePage="changePage" :base-url="baseUrl"></Dashboard>
     </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
             page: 'login-page',
             panggilan: localStorage.panggilan,
             isLogin: false,
+            baseUrl: 'https://kanban-izzul.herokuapp.com'
         }
     },
     methods: {      

@@ -8,7 +8,7 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3" style="overflow-y:scroll; overflow-x:hidden; height:400px; background-color: rgba(0,0,0,.03);" >
                 <div class="card m-3" v-for="filteredTask in filteredTasks" :key= filteredTask.id>    
-                    <CategoryCard :filteredTask="filteredTask" :fetch-tasks="fetchTasks"></CategoryCard>
+                    <CategoryCard :filteredTask="filteredTask" :fetch-tasks="fetchTasks" :base-url="baseUrl"></CategoryCard>
                 </div>
                 </div>
                 <div class="card-footer">
@@ -37,7 +37,7 @@ import Axios from 'axios'
 
 export default {
     name: 'Category',
-    props: ['filteredTasks', 'category', 'dbcategory', 'fetchTasks'],
+    props: ['filteredTasks', 'category', 'dbcategory', 'fetchTasks', 'baseUrl'],
     components: {
         CategoryCard
     },
@@ -61,7 +61,7 @@ export default {
         addNewTask(){
             Axios({
                 method: 'POST',
-                url: 'http://localhost:3000/tasks',
+                url: `${this.baseUrl}/tasks`,
                 headers: {
                     access_token: localStorage.access_token
                 },

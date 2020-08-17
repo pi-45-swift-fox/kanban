@@ -10689,6 +10689,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 var _default = {
   name: 'Login',
+  props: ['baseUrl'],
   data: function data() {
     return {
       email: '',
@@ -10706,7 +10707,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'POST',
-        url: 'http://localhost:3000/login',
+        url: "".concat(this.baseUrl, "/login"),
         data: {
           email: this.email,
           password: this.password
@@ -10998,6 +10999,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 var _default = {
   name: 'Register',
+  props: ['baseUrl'],
   data: function data() {
     return {
       emailRegister: '',
@@ -11010,7 +11012,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'POST',
-        url: 'http://localhost:3000/register',
+        url: "".concat(this.baseUrl, "/register"),
         data: {
           email: this.emailRegister,
           password: this.passwordRegister
@@ -11307,7 +11309,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 var _default = {
   name: 'card',
-  props: ['filteredTask', 'fetchTasks'],
+  props: ['filteredTask', 'fetchTasks', 'baseUrl'],
   data: function data() {
     return {
       newTitle: '',
@@ -11321,7 +11323,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'PATCH',
-        url: "http://localhost:3000/tasks/".concat(id, "/category"),
+        url: "".concat(this.baseUrl, "/tasks/").concat(id, "/category"),
         headers: {
           access_token: localStorage.access_token
         },
@@ -11342,7 +11344,7 @@ var _default = {
       console.log(id);
       (0, _axios.default)({
         method: 'DELETE',
-        url: "http://localhost:3000/tasks/".concat(id),
+        url: "".concat(this.baseUrl, "/tasks/").concat(id),
         headers: {
           access_token: localStorage.access_token
         }
@@ -11359,7 +11361,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'PATCH',
-        url: "http://localhost:3000/tasks/".concat(id, "/title"),
+        url: "".concat(this.baseUrl, "/tasks/").concat(id, "/title"),
         headers: {
           access_token: localStorage.access_token
         },
@@ -11371,12 +11373,6 @@ var _default = {
 
         console.log('berhasil update title');
       }).catch(function (err) {
-        // if (!err.response) {
-        // // network error
-        //     this.errorStatus = 'Error: Network Error';
-        // } else {
-        //     this.errorStatus = err.response.data.message;
-        // }
         console.log('error==>', err);
       });
     }
@@ -11804,7 +11800,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 var _default = {
   name: 'Category',
-  props: ['filteredTasks', 'category', 'dbcategory', 'fetchTasks'],
+  props: ['filteredTasks', 'category', 'dbcategory', 'fetchTasks', 'baseUrl'],
   components: {
     CategoryCard: _CategoryCard.default
   },
@@ -11827,7 +11823,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'POST',
-        url: 'http://localhost:3000/tasks',
+        url: "".concat(this.baseUrl, "/tasks"),
         headers: {
           access_token: localStorage.access_token
         },
@@ -11894,7 +11890,8 @@ exports.default = _default;
               _c("CategoryCard", {
                 attrs: {
                   filteredTask: filteredTask,
-                  "fetch-tasks": _vm.fetchTasks
+                  "fetch-tasks": _vm.fetchTasks,
+                  "base-url": _vm.baseUrl
                 }
               })
             ],
@@ -12094,262 +12091,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   name: 'Kanban-home-page',
+  props: ['baseUrl'],
   components: {
     CategoryList: _CategoryList.default
   },
@@ -12392,7 +12136,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'GET',
-        url: 'http://localhost:3000/tasks',
+        url: "".concat(this.baseUrl, "/tasks"),
         headers: {
           access_token: localStorage.access_token
         }
@@ -12511,7 +12255,8 @@ exports.default = _default;
               category: "BACK LOG",
               dbcategory: "back log",
               filteredTasks: _vm.backlog,
-              "fetch-tasks": _vm.fetchTasks
+              "fetch-tasks": _vm.fetchTasks,
+              "base-url": _vm.baseUrl
             }
           }),
           _vm._v(" "),
@@ -12520,7 +12265,8 @@ exports.default = _default;
               category: "TODO",
               dbcategory: "todo",
               filteredTasks: _vm.todo,
-              "fetch-tasks": _vm.fetchTasks
+              "fetch-tasks": _vm.fetchTasks,
+              "base-url": _vm.baseUrl
             }
           }),
           _vm._v(" "),
@@ -12529,7 +12275,8 @@ exports.default = _default;
               category: "DOING",
               dbcategory: "doing",
               filteredTasks: _vm.doing,
-              "fetch-tasks": _vm.fetchTasks
+              "fetch-tasks": _vm.fetchTasks,
+              "base-url": _vm.baseUrl
             }
           }),
           _vm._v(" "),
@@ -12538,7 +12285,8 @@ exports.default = _default;
               category: "COMPLETED",
               dbcategory: "completed",
               filteredTasks: _vm.completed,
-              "fetch-tasks": _vm.fetchTasks
+              "fetch-tasks": _vm.fetchTasks,
+              "base-url": _vm.baseUrl
             }
           })
         ],
@@ -12638,7 +12386,8 @@ var _default = {
     return {
       page: 'login-page',
       panggilan: localStorage.panggilan,
-      isLogin: false
+      isLogin: false,
+      baseUrl: 'https://kanban-izzul.herokuapp.com'
     };
   },
   methods: {
@@ -12677,14 +12426,17 @@ exports.default = _default;
     [
       _vm.page === "login-page"
         ? _c("Login", {
+            attrs: { "base-url": _vm.baseUrl },
             on: { changeLogin: _vm.changeLogin, changePage: _vm.changePage }
           })
         : _vm.page === "register-page"
         ? _c("Register", {
+            attrs: { "base-url": _vm.baseUrl },
             on: { changeLogin: _vm.changeLogin, changePage: _vm.changePage }
           })
         : _vm.page === "kanban-home-page"
         ? _c("Dashboard", {
+            attrs: { "base-url": _vm.baseUrl },
             on: { changeLogin: _vm.changeLogin, changePage: _vm.changePage }
           })
         : _vm._e()
@@ -12738,79 +12490,7 @@ new _vue.default({
   render: function render(h) {
     return h(_App.default);
   }
-}).$mount('#app'); // var app = new Vue({
-//     el: '#app',
-//     data: {
-//       message: 'Hello Vue!',
-//     //   modalRegister = `
-//     //   <div class="modal" tabindex="-1" role="dialog">
-//     //     <div class="modal-dialog" role="document">
-//     //         <div class="modal-content">
-//     //         <div class="modal-header">
-//     //             <h5 class="modal-title">Success</h5>
-//     //             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//     //             <span aria-hidden="true">&times;</span>
-//     //             </button>
-//     //         </div>
-//     //         <div class="modal-body">
-//     //             <p>Modal body text goes here.</p>
-//     //         </div>
-//     //         <div class="modal-footer">
-//     //             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-//     //         </div>
-//     //         </div>
-//     //     </div>
-//     //     </div>
-//     //   `
-//     },
-//     methods: {
-//         login(){
-//             axios({
-//                 method: 'POST',
-//                 url: 'http://localhost:3000/login',
-//                 data: {
-//                     email: this.email,
-//                     password: this.password
-//                 }
-//             })
-//             .then((result) => {
-//                 this.isLogin = true
-//                 this.page = 'kanban-home-page'
-//                 localStorage.access_token = result.data
-//                 console.log(result.data);   
-//             }).catch((err) => {
-//                 console.log('error', err);
-//             });
-//         },
-//         logout(){
-//             this.isLogin =false
-//             this.page = 'login-page'
-//         },
-//         showRegister(){
-//             this.page = 'register-page'
-//         },
-//         register(){
-//             axios({
-//                 method: 'POST',
-//                 url: 'http://localhost:3000/register',
-//                 data: {
-//                     email: this.emailRegister,
-//                     password: this.passwordRegister
-//                 }
-//             })
-//             .then((result) => {     
-//                 this.isLogin =false
-//                 this.page = 'login-page'       
-//                 console.log('berhasil', result.data)
-//             }).catch((err) => {
-//                 console.log('error', err)
-//             });
-//         },
-//         backLogin(){
-//             this.page = 'login-page'
-//         }
-//     }
-//   })
+}).$mount('#app');
 },{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"src/App.vue"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -12839,7 +12519,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55816" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63397" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

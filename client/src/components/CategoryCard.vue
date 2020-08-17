@@ -58,7 +58,7 @@ import axios from 'axios'
 
 export default {
     name: 'card',
-    props: ['filteredTask', 'fetchTasks'],
+    props: ['filteredTask', 'fetchTasks', 'baseUrl'],
     data(){
         return{
             newTitle: '',
@@ -72,7 +72,7 @@ export default {
         editCategory(category, id){
             axios({
                 method: 'PATCH',
-                url: `http://localhost:3000/tasks/${id}/category`,
+                url: `${this.baseUrl}/tasks/${id}/category`,
                 headers: {
                     access_token: localStorage.access_token
                 },
@@ -91,7 +91,7 @@ export default {
             console.log(id);
             axios({
                 method: 'DELETE',
-                url: `http://localhost:3000/tasks/${id}`,
+                url: `${this.baseUrl}/tasks/${id}`,
                 headers: {
                     access_token: localStorage.access_token
                 }
@@ -107,7 +107,7 @@ export default {
         updateTitle(id){
             axios({
                 method: 'PATCH',
-                url: `http://localhost:3000/tasks/${id}/title`,
+                url: `${this.baseUrl}/tasks/${id}/title`,
                 headers: {
                     access_token: localStorage.access_token
                 },
@@ -119,12 +119,6 @@ export default {
                 this.fetchTasks()
                 console.log('berhasil update title');
             }).catch((err) => {
-                    // if (!err.response) {
-                    // // network error
-                    //     this.errorStatus = 'Error: Network Error';
-                    // } else {
-                    //     this.errorStatus = err.response.data.message;
-                    // }
                     console.log('error==>',err);
             });
         }
