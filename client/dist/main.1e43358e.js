@@ -10752,7 +10752,7 @@ var _default = {
     return {
       email: '',
       password: '',
-      clientId: '568139109973-i3cal2fhs8l8i27kddanv7o6de54egfb.apps.googleusercontent.com'
+      clientId: '84348851293-m95omlg4j74ho205l08am8ugjfc56et1.apps.googleusercontent.com'
     };
   },
   methods: {
@@ -15751,7 +15751,8 @@ var _default = {
       page: 'login-page',
       panggilan: localStorage.panggilan,
       isLogin: false,
-      baseUrl: 'http://localhost:3000'
+      baseUrl: 'https://kanban-izzul.herokuapp.com/' // baseUrl: 'http://localhost:3000'
+
     };
   },
   methods: {
@@ -15923,7 +15924,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52498" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64027" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
