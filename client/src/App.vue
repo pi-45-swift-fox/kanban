@@ -26,7 +26,7 @@ export default {
             page: 'login-page',
             panggilan: localStorage.panggilan,
             isLogin: false,
-            baseUrl: 'https://kanban-izzul.herokuapp.com/'
+            baseUrl: 'https://kanban-izzul.herokuapp.com'
             // baseUrl: 'http://localhost:3000'
         }
     },

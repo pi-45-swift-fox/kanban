@@ -11330,7 +11330,208 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/CategoryCard.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/ModalEditTitle.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  name: 'modal-edit-title',
+  props: ['filtered-task-id', 'updateTitle'],
+  data: function data() {
+    return {
+      newTitle: ''
+    };
+  },
+  methods: {
+    updateTitleThis: function updateTitleThis() {
+      this.updateTitle(this.filtered - task - id);
+    }
+  }
+};
+exports.default = _default;
+        var $115ea6 = exports.default || module.exports;
+      
+      if (typeof $115ea6 === 'function') {
+        $115ea6 = $115ea6.options;
+      }
+    
+        /* template */
+        Object.assign($115ea6, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "exampleModal1",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              attrs: { method: "post" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.updateTitleThis()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newTitle,
+                      expression: "newTitle"
+                    }
+                  ],
+                  staticClass: "w-100 h-100",
+                  attrs: { name: "task", id: "" },
+                  domProps: { value: _vm.newTitle },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.newTitle = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("br")
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Edit Task")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Save changes")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$115ea6', $115ea6);
+          } else {
+            api.reload('$115ea6', $115ea6);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"_css_loader":"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/CategoryCard.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11339,6 +11540,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _ModalEditTitle = _interopRequireDefault(require("./ModalEditTitle"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11400,6 +11603,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = {
   name: 'card',
   props: ['filteredTask', 'fetchTasks', 'baseUrl', 'showAlert'],
+  components: {
+    ModalEditTitle: _ModalEditTitle.default
+  },
   data: function data() {
     return {
       newTitle: '',
@@ -11465,6 +11671,7 @@ var _default = {
       }).then(function () {
         _this3.fetchTasks();
 
+        console.log('masuk', id);
         console.log('berhasil update title');
       }).catch(function (err) {
         console.log('error==>', err);
@@ -11472,6 +11679,9 @@ var _default = {
         _this3.$emit('showAlert', err.message);
       });
     }
+  },
+  created: function created() {
+    console.log(this.filteredTask.id);
   }
 };
 exports.default = _default;
@@ -11511,73 +11721,77 @@ exports.default = _default;
               }
             })
           ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "modal fade",
-            attrs: {
-              id: "exampleModal1",
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "modal-dialog", attrs: { role: "document" } },
-              [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.updateTitle(_vm.filteredTask.id)
-                        }
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "modal-body" }, [
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newTitle,
-                              expression: "newTitle"
-                            }
-                          ],
-                          staticClass: "w-100 h-100",
-                          attrs: { name: "task", id: "" },
-                          domProps: { value: _vm.newTitle },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.newTitle = $event.target.value
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]
         )
       ]),
       _vm._v("\n         \n        "),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "exampleModal1",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    attrs: { method: "post" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.updateTitle(_vm.filteredTask.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newTitle,
+                            expression: "newTitle"
+                          }
+                        ],
+                        staticClass: "w-100 h-100",
+                        attrs: { name: "task", id: "" },
+                        domProps: { value: _vm.newTitle },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.newTitle = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("br")
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
       _c("small", [
         _c(
           "svg",
@@ -11756,7 +11970,12 @@ exports.default = _default;
     _vm._v(" "),
     _c("p", { staticClass: "card-text" }, [
       _c("small", { staticClass: "text-muted" }, [
-        _vm._v("By: " + _vm._s(_vm.filteredTask.User["email"]))
+        _vm._v(
+          "By: " +
+            _vm._s(_vm.filteredTask.User["email"]) +
+            " - " +
+            _vm._s(_vm.filteredTask.id)
+        )
       ])
     ]),
     _vm._v(" "),
@@ -11847,7 +12066,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/CategoryList.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","./ModalEditTitle":"src/components/ModalEditTitle.vue","_css_loader":"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/CategoryList.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15751,7 +15970,7 @@ var _default = {
       page: 'login-page',
       panggilan: localStorage.panggilan,
       isLogin: false,
-      baseUrl: 'https://kanban-izzul.herokuapp.com/' // baseUrl: 'http://localhost:3000'
+      baseUrl: 'https://kanban-izzul.herokuapp.com' // baseUrl: 'http://localhost:3000'
 
     };
   },
@@ -15924,7 +16143,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64027" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65358" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
