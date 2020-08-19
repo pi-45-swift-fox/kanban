@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     username: {
       type: DataTypes.STRING,
-      allowNull:false,
+      allowNull: false,
       validate: {
         notNull: {
           msg: 'email tidak boleh kosong'
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull:false,
+      allowNull: false,
       validate: {
         notNull: {
           msg: 'password tidak boleh kosong'
@@ -52,3 +52,20 @@ module.exports = (sequelize, DataTypes) => {
   });
   return User;
 };
+
+
+// User.find({
+//   where: { id: id },
+//   attributes: ['id', 'username', 'createdAt', 'updatedAt', 'RoleId'],
+//   include: [{
+//     model: UserRole, as: 'Role',
+//     include: [{
+//       model: Permission,
+//       as: 'Permissions',
+//       attributes: {
+//         include: ['id', 'name'],
+//         exclude: 'UserRolePermission'
+//       }
+//     }]
+//   }]
+// })

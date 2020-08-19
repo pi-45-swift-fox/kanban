@@ -18,9 +18,7 @@
       </div>
       <button type="submit" class="btn btn-primary">Login</button>
       or signIn with Google
-      <div class="g-signin2 btn btn-primary" data-onsuccess="onSignIn" @click="googleSignIn" >SignIn</div>
-
-      
+      <div class="g-signin2 btn btn-primary" data-onsuccess="onSignIn" @click="google">SignIn</div>
     </form>
   </div>
 </template>
@@ -53,26 +51,47 @@ export default {
           console.log(err);
         });
     },
+    async google() {
+      try {
+        const googleUser = await this.$gAuth.signIn();
+        if (!googleUser) {
+          return null;
+        }
+        console.log("googleUser", googleUser);
+        console.log("getId", googleUser.getId());
+        console.log("getBasicProfile", googleUser.getBasicProfile());
+        console.log("getAuthResponse", googleUser.getAuthResponse());
+        console.log(
+          "getAuthResponse",
+          this.$gAuth.GoogleAuth.currentUser.get().getAuthResponse()
+        );
+        this.isSignIn = this.$gAuth.isAuthorized;
+      } catch (error) {
+        //on fail do something
+        console.error(error);
+        return null;
+      }
+    },
     googleSignIn() {
       this.$gAuth
         .signIn()
         .then((response) => {
           const id_token = response.getAuthResponse().id_token;
-          console.log(id_token)
+          console.log(id_token, "<<<<");
           axios({
             method: "POST",
             url: "http://localhost:3000/googlesignin",
             data: {
-               id_token,
+              id_token,
             },
           }).then((res) => {
-            console.log(res)
+            console.log(res);
             localStorage.setItem("token", res.data.access_token);
             this.$emit("emitloginStatus");
           });
         })
         .catch((err) => {
-          console.error(err);
+          console.error(err, "<<<<<<<<");
         });
     },
   },

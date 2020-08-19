@@ -6,6 +6,7 @@ const user = require('../models/user');
 
 class UserController {
   static async regis(req, res, next) {
+    console.log('<<<<<<<<')
     const dataRegis = {
       username: req.body.username,
       password: req.body.password,
@@ -15,6 +16,7 @@ class UserController {
       const regisData = await User.create(dataRegis)
       return res.status(201).json({ regisData })
     } catch (error) {
+      console.log(error)
       next(error)
     }
   }
@@ -42,6 +44,7 @@ class UserController {
         }
       }
     } catch (error) {
+      console.log(error)
       next(error)
     }
   }
@@ -88,6 +91,7 @@ class UserController {
         }
       }
     } catch (error) {
+      console.log(error)
       next(error)
     }
   }

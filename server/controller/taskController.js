@@ -6,10 +6,9 @@ class TaskController{
       category:req.body.category,
       UserId:req.userData.id
     }
-    console.log(createData,'disini <<<<<<<<<<<<<<<')
     try {
       const dataCreate = await Task.create(createData )
-      res.status(201).json({dataCreate})
+      res.status(201).json({message:"task berhasil di tambahkan"})
     } catch (error) {
       next(error)
     }
