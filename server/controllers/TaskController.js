@@ -35,6 +35,12 @@ class TaskController {
             .then(data => res.status(200).json({msg: 'task delete'}))
             .catch(err => res.status(500).json({msg: 'Internal Server Error create'}))
     }
+
+    static getUser(req, res) {
+        Task.findByPk(+req.params.id)
+            .then(data => res.status(200).json({msg: 'get user'}))
+            .catch(err => res.status(500).json(err))
+    }
 }
 
 module.exports = TaskController

@@ -17,6 +17,7 @@ route.post('/googleSign', UserController.googleSign)
 route.use(authenticate)
 route.get('/tasks', TaskController.show)
 route.post('/tasks', TaskController.create)
+route.get('/tasks/:id', authorization, TaskController.getUser)
 route.put('/tasks/:id', authorization, TaskController.edit)
 route.delete('/tasks/:id', authorization, TaskController.delete)
 
