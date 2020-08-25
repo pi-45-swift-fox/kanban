@@ -2,10 +2,12 @@
   <div>
     <Navbar @successLogout="successLogout" @refresh="refresh"></Navbar>
     <div class="container mt-4">
-      <Category v-for="(category, idx) in categories" :key="idx"
-                    :category="category"
-                    :tasks="tasks"
-                    @refresh="refresh"></Category>
+      <div class="row">
+        <Category v-for="category in categories" :key="category.id"
+                      :category="category"
+                      :tasks="tasks"
+                      @refresh="refresh"></Category>
+      </div>
     </div>
   </div>
 </template>

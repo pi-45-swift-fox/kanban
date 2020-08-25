@@ -9,6 +9,7 @@
                             class="list-card-composer-textarea js-card-title form-control" 
                             style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;" v-model="title"></textarea>
                     <select id="category" v-model="newCategory" class="custom-select custom-select-sm">
+                        <!-- <option v-for="valueCategory in categories" :value={{valueCategory}}>{{valueCategory}}</option> -->
                         <option value="backlog">Back Log</option>
                         <option value="todo">Todo</option>
                         <option value="done">Done</option>
@@ -33,34 +34,12 @@
                 </div>
             </div>
         </div>
-        
-        <!-- CONFIRM DELETE -->
-        <!-- <div v-if="confirmDelete">
-            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Delete this todo ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" onclick="deleteTodo(${id})">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
     name: 'CategoryList',
@@ -70,7 +49,7 @@ export default {
             title: this.task.title,
             goToEditTask: false,
             confirmDelete: false,
-            baseUrl: 'http://localhost:3000/tasks/',
+            baseUrl: 'https://kanban-adnkamil.herokuapp.com/tasks/',
             categories: ['backlog', 'todo', 'done', 'completed']
         }
     },
@@ -103,22 +82,38 @@ export default {
                 this.goToEditTask = false
                 this.$emit('refresh')
             })
-            .catch(err => console.log(err, 'error client edit'))
+            .catch(err => {
+                swal('Ooppss!!', `You don't have access`, 'error')
+                console.log(err, 'error client edit')})
         },
         deleteTask() {
             let id = this.task.id
-            // console.log('delete id' + id);
-            axios({
-                method: 'delete',
-                url: this.baseUrl + id,
-                headers: {
-                    accesstoken: localStorage.accesstoken 
-                },
+            swal({
+                title: 'Are you sure ??',
+                text: `Once deleted, you will not be able to recover this task!`,
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true
+
             })
-            .then(res => {
-                this.$emit('refresh')
+            .then(willDel => {
+                if(willDel) {
+                    axios({
+                        method: 'delete',
+                        url: this.baseUrl + id,
+                        headers: {
+                            accesstoken: localStorage.accesstoken 
+                        },
+                    })
+                    .then(res => {
+                        this.$emit('refresh')
+                    })
+                    .catch(err => {
+                        console.log(err, 'error client delete')
+                        swal('Ooppss!!', `You don't have access`, 'error')
+                    })
+                }
             })
-            .catch(err => console.log(err, 'error client delete'))
         }
     },
     // created() {

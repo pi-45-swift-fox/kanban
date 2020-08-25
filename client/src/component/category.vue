@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="category ml-3 bg-secondary">
+        <div class="ml-3 mb-3 category bg-secondary ">
             <div class="header p-2">
                 <span>{{cardTitle}}</span>
             </div>
@@ -13,7 +13,7 @@
                             class="list-card-composer-textarea js-card-title form-control" 
                             style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;" v-model="title"></textarea>
             </div>
-            <div class="footer p-2">
+            <div class="footer p-2 ">
                 <div v-if="!addForm" >
                     <a class="btn btn-outline-success" @click="toAddForm">Add Task</a>
                 </div>
@@ -29,13 +29,13 @@
 <script>
 import CategoryList from './categoryList'
 import Axios from 'axios'
-// import AddTask from './addTask'
+import swal from 'sweetalert'
 
 export default {
     name: "Category",
     data() {
         return {
-            baseUrl: "http://localhost:3000",
+            baseUrl: "https://kanban-adnkamil.herokuapp.com",
             cardTitle: '',
             addForm: false,
             title: ''
@@ -84,6 +84,10 @@ export default {
                     this.title = ''
                     this.addForm = false
                     this.$emit('refresh')
+                    swal('Ooyeahhh', 'Task added', 'success', {
+                        timer:1500,
+                        button: false
+                        })
                 })
                 .catch(err => console.log(err))
         }   

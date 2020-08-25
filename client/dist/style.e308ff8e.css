@@ -3,10 +3,6 @@ body {
     color: antiquewhite;
 }
 
-.container {
-    display: flex;
-}
-
 .category {
     width: 260px;
     height: fit-content;

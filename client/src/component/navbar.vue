@@ -8,17 +8,25 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
+
 export default {
   name: "Navbar",
-  data() {
-    return {
-      // userEmail: localStorage.currentUserEmail
-    };
-  },
   methods: {
     logout() {
-      localStorage.clear();
-      this.$emit('successLogout')
+      swal({
+        title: 'Waitt!!',
+        text: 'do you want to leave me??',
+        icon: 'warning',
+        buttons: ['No', 'Yes'],
+        dangerMode: true
+      })
+      .then(confirmLogout => {
+        if(confirmLogout) {
+          localStorage.clear();
+          this.$emit('successLogout')
+        }
+      })
     },
     refresh() {
       this.$emit('refresh')

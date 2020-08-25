@@ -17,7 +17,7 @@ export default {
   components: {login, register, homePage},
   data() {
     return {
-      baseUrl: 'http://localhost:3000',
+      baseUrl: 'https://kanban-adnkamil.herokuapp.com',
       page: 'login',
       tasks: []
     }
@@ -32,7 +32,6 @@ export default {
         }
       })
       .then(result => {
-        // console.log(result.data);
         this.tasks = result.data
       })
       .catch(err => {
@@ -57,7 +56,7 @@ export default {
     if(localStorage.accesstoken) {
       this.page = 'homePage'
       this.fetchTasks()
-    }
+    } 
   }
 }
 </script>

@@ -8,7 +8,7 @@
                         placeholder="Enter email">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" v-model="passwordRegister" id="passwordRegis" required
+                    <input type="password" class="form-control" v-model="passwordRegister" id="passwordRegis"
                         placeholder="Enter password">
                 </div>
                 <button type="submit" class="btn btn-outline-success mx -2">Register</button>
@@ -20,12 +20,13 @@
 
 <script>
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
     name: "Register",
     data() {
         return {
-            baseUrl: "http://localhost:3000",
+            baseUrl: "https://kanban-adnkamil.herokuapp.com",
             emailRegister: "",
             passwordRegister: "",
         }
@@ -46,7 +47,10 @@ export default {
                 this.$emit('successLogin')
             })
             .catch(err => {
-                console.log("error");
+                swal('Uppsss!!', 'Pleas input email & password', {
+                    buttons: false,
+                    timer: 2000
+                })
                 console.log(err, "<< err");
             });
         },
