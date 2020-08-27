@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid fill bg-dark p-0" >
         <h3 class="text-center text-white">Welcome to <span class="font-weight-bold">かんばん</span> App</h3>
-        <p class="text-center text-white"><span class="font-weight-bold">かんばん</span> App make you easier to manage works. Because you can manage what will do, <br>then what is a work still doing, what has done, and what has completed</p>
+        <p class="text-center text-white"><span class="font-weight-bold">かんばん</span> App make you easier to manage works. Because you can manage work that <br> what is still plan in back log, what will do, then what is a work still doing, and what has completed</p>
         <div class="mt-5 mb-5 ">
             <div class="card shadow-none p-3">
                 <h4 class="text-center">Login To <span class="font-weight-bold">かんばん</span></h4>

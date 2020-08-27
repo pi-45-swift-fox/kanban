@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 
 class auth {
     static async authentication(req, res, next) {
-        console.log('masuk otentikasi',req.headers.access_token);
         try {
             if (!req.headers.access_token) {
                 res.status(500).json({

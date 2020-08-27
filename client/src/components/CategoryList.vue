@@ -73,15 +73,29 @@ export default {
             .then(result => {
                 this.showTask = false,
                 this.showAddTask = true,
-                this.$emit('showAlertSuccess', ' Success Added')  
                 this.fetchTasks()
+                this.showAlertSuccess('Success Added')  
                 console.log('berhasil', result.data);    
             })
             .catch(err => {
                 console.log(err);
-                this.$emit('showAlert', err.message)
+                this.showAlertSuccess(err.response.data.message)  
             })
-        }
+        },
+        showAlertSuccess(message){
+          this.$swal({
+            icon: 'success',
+            title: 'SUCCESS',
+            text: message
+        })
+        },
+        showAlertFail(message){
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: message
+        });
+        },
     }
 
 }

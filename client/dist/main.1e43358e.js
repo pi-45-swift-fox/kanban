@@ -10980,11 +10980,11 @@ var staticRenderFns = [
     return _c("p", { staticClass: "text-center text-white" }, [
       _c("span", { staticClass: "font-weight-bold" }, [_vm._v("かんばん")]),
       _vm._v(
-        " App make you easier to manage works. Because you can manage what will do, "
+        " App make you easier to manage works. Because you can manage work that "
       ),
       _c("br"),
       _vm._v(
-        "then what is a work still doing, what has done, and what has completed"
+        " what is still plan in back log, what will do, then what is a work still doing, and what has completed"
       )
     ])
   },
@@ -11630,10 +11630,12 @@ var _default = {
         _this.fetchTasks();
 
         console.log('berhasil move');
+
+        _this.showAlertSuccess('berhasil move');
       }).catch(function (err) {
         console.log(err);
 
-        _this.$emit('showAlert', err.message);
+        _this.showAlertFail(err.response.data.message);
       });
     },
     deleteTask: function deleteTask(id) {
@@ -11650,10 +11652,12 @@ var _default = {
         _this2.fetchTasks();
 
         console.log('berhasil', result.data);
+
+        _this2.showAlertSuccess(result.data);
       }).catch(function (err) {
         console.log(err);
 
-        _this2.$emit('showAlert', err.message);
+        _this2.showAlertFail(err.response.data.message);
       });
     },
     updateTitle: function updateTitle(id) {
@@ -11673,10 +11677,26 @@ var _default = {
 
         console.log('masuk', id);
         console.log('berhasil update title');
+
+        _this3.showAlertSuccess('berhasil update title');
       }).catch(function (err) {
         console.log('error==>', err);
 
-        _this3.$emit('showAlert', err.message);
+        _this3.showAlertSuccess(err.response.data.message);
+      });
+    },
+    showAlertSuccess: function showAlertSuccess(message) {
+      this.$swal({
+        icon: 'success',
+        title: 'SUCCESS',
+        text: message
+      });
+    },
+    showAlertFail: function showAlertFail(message) {
+      this.$swal({
+        icon: 'error',
+        title: 'Oops...',
+        text: message
       });
     }
   },
@@ -11706,7 +11726,7 @@ exports.default = _default;
             staticClass: "edit",
             attrs: {
               "data-toggle": "modal",
-              "data-target": "#exampleModal1",
+              "data-target": "#exampleModal" + _vm.filteredTask.id,
               xmlns: "http://www.w3.org/2000/svg",
               width: "15",
               height: "15",
@@ -11730,7 +11750,7 @@ exports.default = _default;
         {
           staticClass: "modal fade",
           attrs: {
-            id: "exampleModal1",
+            id: "exampleModal" + _vm.filteredTask.id,
             tabindex: "-1",
             role: "dialog",
             "aria-labelledby": "exampleModalLabel",
@@ -11970,12 +11990,7 @@ exports.default = _default;
     _vm._v(" "),
     _c("p", { staticClass: "card-text" }, [
       _c("small", { staticClass: "text-muted" }, [
-        _vm._v(
-          "By: " +
-            _vm._s(_vm.filteredTask.User["email"]) +
-            " - " +
-            _vm._s(_vm.filteredTask.id)
-        )
+        _vm._v("By: " + _vm._s(_vm.filteredTask.User["email"]))
       ])
     ]),
     _vm._v(" "),
@@ -12147,15 +12162,29 @@ var _default = {
           category: this.dbcategory
         }
       }).then(function (result) {
-        _this.showTask = false, _this.showAddTask = true, _this.$emit('showAlertSuccess', ' Success Added');
+        _this.showTask = false, _this.showAddTask = true, _this.fetchTasks();
 
-        _this.fetchTasks();
+        _this.showAlertSuccess('Success Added');
 
         console.log('berhasil', result.data);
       }).catch(function (err) {
         console.log(err);
 
-        _this.$emit('showAlert', err.message);
+        _this.showAlertSuccess(err.response.data.message);
+      });
+    },
+    showAlertSuccess: function showAlertSuccess(message) {
+      this.$swal({
+        icon: 'success',
+        title: 'SUCCESS',
+        text: message
+      });
+    },
+    showAlertFail: function showAlertFail(message) {
+      this.$swal({
+        icon: 'error',
+        title: 'Oops...',
+        text: message
       });
     }
   }
@@ -16143,7 +16172,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65358" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57199" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

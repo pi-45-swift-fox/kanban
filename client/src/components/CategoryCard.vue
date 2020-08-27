@@ -1,10 +1,10 @@
 <template>
     <div class="card-body">
         <div class="input-group justify-content-end ">
-            <small><svg class="edit" data-toggle="modal" data-target="#exampleModal1" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M18.363 8.464l1.433 1.431-12.67 12.669-7.125 1.436 1.439-7.127 12.665-12.668 1.431 1.431-12.255 12.224-.726 3.584 3.584-.723 12.224-12.257zm-.056-8.464l-2.815 2.817 5.691 5.692 2.817-2.821-5.693-5.688zm-12.318 18.718l11.313-11.316-.705-.707-11.313 11.314.705.709z"/></svg></small>
+            <small><svg class="edit" data-toggle="modal" :data-target="'#exampleModal'+filteredTask.id" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M18.363 8.464l1.433 1.431-12.67 12.669-7.125 1.436 1.439-7.127 12.665-12.668 1.431 1.431-12.255 12.224-.726 3.584 3.584-.723 12.224-12.257zm-.056-8.464l-2.815 2.817 5.691 5.692 2.817-2.821-5.693-5.688zm-12.318 18.718l11.313-11.316-.705-.707-11.313 11.314.705.709z"/></svg></small>
             &nbsp;
             <!-- <ModalEditTitle :filtered-task-id="filteredTask.id" :update-title="updateTitle"></ModalEditTitle> -->
-                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" :id="'exampleModal'+filteredTask.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
@@ -48,7 +48,7 @@
             </div>
         </div><br><br>
         <h5 class="card-title  mt-0">{{ filteredTask.title }}</h5>
-        <p class="card-text"><small class="text-muted">By: {{ filteredTask.User['email'] }} - {{ filteredTask.id }}</small></p>
+        <p class="card-text"><small class="text-muted">By: {{ filteredTask.User['email'] }}</small></p>
         <p class="card-text"><small class="text-muted">{{ new Date(filteredTask.createdAt).toDateString() }}</small></p>
     </div>    
 </template>
@@ -86,9 +86,10 @@ export default {
             .then(() => {
                 this.fetchTasks()
                 console.log('berhasil move');
+                this.showAlertSuccess('berhasil move')
             }).catch((err) => {
                 console.log(err);
-                this.$emit('showAlert', err.message)
+                this.showAlertFail(err.response.data.message)
             });
         },
         deleteTask(id){
@@ -103,10 +104,11 @@ export default {
             .then((result) => {
                 this.fetchTasks()
                 console.log('berhasil', result.data)
+                this.showAlertSuccess(result.data)
             })
             .catch((err) => {
                 console.log(err);
-                this.$emit('showAlert', err.message)
+                this.showAlertFail(err.response.data.message)
             });
         },
         updateTitle(id){
@@ -124,11 +126,26 @@ export default {
                 this.fetchTasks()
                 console.log('masuk', id);
                 console.log('berhasil update title');
+                this.showAlertSuccess('berhasil update title')
             }).catch((err) => {
                 console.log('error==>',err);
-                this.$emit('showAlert', err.message)
+                this.showAlertSuccess(err.response.data.message)            
             });
-        }
+        },
+        showAlertSuccess(message){
+          this.$swal({
+            icon: 'success',
+            title: 'SUCCESS',
+            text: message
+        })
+        },
+        showAlertFail(message){
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: message
+        });
+        },
     },
     created(){
         console.log(this.filteredTask.id);
