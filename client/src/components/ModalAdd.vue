@@ -71,7 +71,7 @@ export default {
     AddTask() {
       axios({
         method: "POST",
-        url: `http://localhost:3000/task`,
+        url: `https://kanban-swift.herokuapp.com/task`,
         headers: {
           access_token: localStorage.token,
         },

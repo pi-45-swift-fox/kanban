@@ -37,7 +37,7 @@ export default {
     regis() {
       axios({
         method: "POST",
-        url: "http://localhost:3000/register",
+        url: "https://kanban-swift.herokuapp.com/register",
         data: {
           username: this.username,
           password: this.password,
@@ -58,7 +58,7 @@ export default {
           const id_token = response.getAuthResponse().id_token;
           axios({
             method: "POST",
-            url: "http://localhost:3000/googlesignin",
+            url: "https://kanban-swift.herokuapp.com/googlesignin",
             data: {
               id_token,
             },

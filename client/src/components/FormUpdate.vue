@@ -48,7 +48,7 @@ export default {
     UpdateTask() {
       axios({
         method: "PUT",
-        url: `http://localhost:3000/task/${this.Task.id}`,
+        url: `https://kanban-swift.herokuapp.com/${this.Task.id}`,
         headers: {
           access_token: localStorage.token
         },

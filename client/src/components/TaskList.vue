@@ -82,7 +82,7 @@ export default {
     getList() {
       axios({
         method: "GET",
-        url: "http://localhost:3000/task",
+        url: "https://kanban-swift.herokuapp.com/task",
         headers: {
           access_token: localStorage.token,
         },
@@ -110,7 +110,7 @@ export default {
     deleteTask(dataTask) {
       axios({
         method: "DELETE",
-        url: `http://localhost:3000/task/${dataTask.id}`,
+        url: `https://kanban-swift.herokuapp.com/${dataTask.id}`,
         headers: {
           access_token: localStorage.token,
         },
