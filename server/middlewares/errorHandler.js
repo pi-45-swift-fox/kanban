@@ -1,6 +1,6 @@
 module.exports = (err, req, res, next) => {
     console.log(err.errCode);
-    let message = 'Internal server error'
+    let message = ['Internal server error']
     let statusCode = 500
 
     if (err.name == 'SequelizeValidationError') {
@@ -17,15 +17,15 @@ module.exports = (err, req, res, next) => {
     }
     if (err.errCode == 'FORBIDDEN') {
         statusCode = 403
-        message = 'Not allowed'
+        message = ['Not allowed']
     }
     if (err.errCode == 'NOT_FOUND') {
         statusCode = 404
-        message = 'Data not Found'
+        message = ['Data not Found']
     }
     if (err.errCode == 'INVALID_ACCOUNT' || err.name == 'JsonWebTokenError') {
         statusCode = 401
-        message = err.msg ? err.msg : 'Invalid password or email'
+        message = err.msg ? err.msg : ['Invalid password or email']
     }
     res.status(statusCode).json({ message })
 }

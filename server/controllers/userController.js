@@ -16,7 +16,7 @@ class UserController{
                     email
                 }
             })
-            
+
             if(checkDouble){
                 return next({errCode:'INVALID_ACCOUNT', msg:'Your email is already registered'})
             }
@@ -25,7 +25,7 @@ class UserController{
                 email,
                 password
             })
-            
+            console.log(addUser);
             const access_token = jwt.sign({
                 id:addUser.id,
                 name:addUser.name,
@@ -74,9 +74,11 @@ class UserController{
 
     static async googleLogin(req, res, next) {
         const google_token = req.headers.google_token
+        console.log(google_token, 'ini dari controller google_token headers');
         try {
             const payLoad = await verifyGoogle(google_token)
             const email = payLoad.email
+            const name = payLoad.name
             const user = await User.findOne({
                 where: {
                     email
@@ -91,15 +93,16 @@ class UserController{
                         id: user.id
                     }
                 })
-                const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
-                res.status(200).json({ token })
+                const access_token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
+                res.status(200).json({ access_token })
             } else {
                 const newUserGoogle = await User.create({
                     email,
-                    password: password
+                    password: password,
+                    name
                 })
-                const token = jwt.sign({ id: newUserGoogle.id, email: newUserGoogle.email }, process.env.JWT_SECRET);
-                res.status(201).json({ token })
+                const access_token = jwt.sign({ id: newUserGoogle.id, email: newUserGoogle.email }, process.env.JWT_SECRET);
+                res.status(201).json({ access_token })
             }
         } catch (err) {
             console.log(err);

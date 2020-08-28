@@ -6,11 +6,11 @@
               <div v-html="message"></div>
           </ul>
         </div>
-            
-            <div class="w-full max-w-xs">
-                
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 " v-on:submit.prevent="login">
-                    <div class="text-2xl ">Login Below</div> 
+
+            <div class="w-full max-w-s">
+
+                <form class="loginBox shadow-md rounded px-8 pt-6 pb-8 mb-4 " v-on:submit.prevent="login">
+                    <div class="text-2xl ">Login Below</div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="email-login">
                             Email
@@ -35,8 +35,8 @@
                             Sign In
                         </button>
                     </div>
-                    <div class="pt-4">
-                       <a href="#" @click.prevent="changePage('registerPage')" >Register Here</a> 
+                    <div class="pt-4 mb-5 mt-5">
+                       <a href="#" @click.prevent="changePage('registerPage')" class="bg-transparent hover:bg-blue-200 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Register or Login using Google Here</a>
                     </div>
                 </form>
                 <p class="text-center text-gray-500 text-xs">
@@ -45,13 +45,14 @@
             </div>
         </div>
     </div>
-       
+
 </template>
 
 <script>
 
 import axios from 'axios'
-
+// import google from './google.vue'
+import swal from 'sweetalert'
 export default {
     name:'LoginPage',
     data(){
@@ -78,19 +79,30 @@ export default {
                 this.changePage('dashboard')
             })
             .catch(err=>{
-                this.message = err.response
-                console.log(err);
+                // this.message = err.response
+                // console.log(err);
+                swal('Tet Tot', 'Wrong password or email!', 'error')
             })
-            
+
         },
         changePage(page){
             this.$emit('changePage', page)
         },
-        
+
     }
 }
 </script>
 
 <style scoped>
+.loginBox {
+    background: linear-gradient(252deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    box-shadow: -1px 3px 15px 0px rgba(0,0,0,1);
+    border-radius:25px;
+    width:500px;
+    /* height: 400px; */
+    align-items: center;
+    align-self: center;
+    text-align: center;
+}
 
 </style>

@@ -4,7 +4,7 @@
     <div class="pt-5"></div>
     <LoginPage v-if="page === 'loginPage'" @changePage="changePage" :baseUrl="baseUrl"></LoginPage>
     <RegisterPage v-if="page === 'registerPage'" @changePage="changePage" :baseUrl="baseUrl"></RegisterPage>
-    <Dashboard v-if="page=='dashboard'" :tasks="tasks" :baseUrl="baseUrl" @fetchTasks="fetchTasks"></Dashboard>
+    <Dashboard v-if="page === 'dashboard'" :tasks="tasks" :baseUrl="baseUrl" @fetchTasks="fetchTasks"></Dashboard>
 </div>
 </template>
 
@@ -20,7 +20,8 @@ export default {
     data(){
         return {
             page:'loginPage',
-            baseUrl:'http://localhost:3001',
+            // baseUrl:'https://kanban-application-swift.herokuapp.com',
+            baseUrl: 'http://localhost:3001',
             tasks:[]
         }
     },

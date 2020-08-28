@@ -1,13 +1,13 @@
 <template>
-  <div class="center-content">
+  <div class="center-content border-radius-task">
       <div v-if="message">
           <ul class="bg-red-600 text-white" >
               <div v-html="message"></div>
           </ul>
       </div>
-      <div class="w-full max-w-xs">
-          <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" v-on:submit.prevent="registerNewUser" >
-              <div class="text-2xl">Register Below</div> 
+      <div>
+          <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 regBox" v-on:submit.prevent="registerNewUser" >
+              <div class="text-2xl">Register Below</div>
               <div class="mb-4">
                   <label class="block text-gray-700 text-sm font-bold mb-2" for="userNameRegister">
                       Name
@@ -34,15 +34,15 @@
                   <p class="text-red-500 text-xs italic">Please choose a password.</p>
               </div>
               <div class="flex items-center justify-between">
-                  <button 
+                  <button
                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                       type="submit">
                       Sign Up
                   </button>
               </div>
-             <button v-google-signin-button="clientId" class="google-signin-button"> Continue with Google</button>
-                <br>
-              <a href="#" @click="changePage('loginPage')">Already have an account? Click here.</a>
+             <button @click.prevent="" v-google-signin-button="clientId"> <img src="../assets/btn-Google.png" alt=""></button>
+                <br> <br>
+              <a @click.prevent="changePage('loginPage')" id="redirect" class="mt-5 bg-transparent hover:bg-blue-200 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-200 hover:border-transparent rounded" >Already have an account? Click here.</a>
           </form>
           <p class="text-center text-gray-500 text-xs">
               &copy;2020 . All rights reserved.
@@ -54,7 +54,7 @@
 <script>
 import axios from 'axios'
 import GoogleSignInButton from 'vue-google-signin-button-directive'
-
+import google from './google.vue'
 export default {
     name:'RegisterPage',
     data(){
@@ -63,7 +63,7 @@ export default {
             emailRegister:'',
             passwordRegister:'',
             message:'',
-            clientId: '881671303594-on0gj82t4apid6hsqa3tsdshpl1bgr5v.apps.googleusercontent.com'
+            clientId: '492684105259-2th7q858luhjha31snjuvm6m3el5u0d1.apps.googleusercontent.com'
         }
     },
     props:['baseUrl'],
@@ -84,7 +84,7 @@ export default {
                 })
                 .catch(err=>{
                     let msg = []
-                    
+
                     if(Array.isArray(err.response.data.message)){
                         err.response.data.message.forEach(el => {
                             msg.push(`<li>${el}</li>`)
@@ -93,7 +93,7 @@ export default {
                     } else {
                         this.message = err.response.data.message
                     }
-                    
+
                 })
         },
         changePage(page){
@@ -102,12 +102,12 @@ export default {
         OnGoogleAuthSuccess (idToken) {
             console.log(idToken)
             // Receive the idToken and make your magic with the backend
-           
+
             axios({
                 method:'POST',
                 url: this.baseUrl+'/loginGoogle',
                 headers:{
-                    google_token:idToken
+                    google_token: idToken
                 }
             })
             .then(res=>{
@@ -127,13 +127,36 @@ export default {
 </script>
 
 <style scoped>
-.google-signin-button {
-  color: rgb(87, 83, 83);
-  background-color: rgb(243, 189, 189);
-  height: 30px;
-  font-size: 16px;
-  border-radius: 10px;
-  padding: 10px 20px 25px 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+img {
+    height: 50px;
+}
+
+img:hover {
+    box-shadow: 0px -2px 14px -1px rgba(255,255,255,1);
+}
+
+.bg{
+    background: linear-gradient(21deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.regBox {
+    background: linear-gradient(252deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    box-shadow: -1px 3px 15px 0px rgba(0,0,0,1);
+    border-radius:25px;
+    width:500px;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+
+}
+
+#redirect:hover {
+    cursor: pointer;
 }
 </style>
