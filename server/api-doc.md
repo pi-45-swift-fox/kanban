@@ -5,6 +5,7 @@ List of available endpoints:
 ​
 - `POST /register`
 - `POST /login`
+- `POST /loginGoogle`
 - `GET /tasks`
 - `POST /tasks`
 - `PUT /tasks/:id`
@@ -89,6 +90,31 @@ Response:
     "message": "Invalid password or email"
 }
 ```
+
+### POST /loginGoogle
+
+Request:
+
+- data:
+
+```json
+{
+  "google_token" : "string"
+}
+```
+
+Response:
+
+- status: 200
+- body:
+  ​
+
+```json
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IkdyYWNlIiwiZW1haWwiOiJncmFjZWNvcmluZTYwQGdtYWlsLmNvbSIsIm9yZ2FuaXphdGlvbiI6IkhhY2t0aXY4IiwiaWF0IjoxNTk3MjI5MDQ4fQ.7CGCBeN2v2t-0DjhgvBrYN7c4y1f8m3Mb0P5OkDjm1w"
+}
+```
+
 
 ### GET /tasks
 
