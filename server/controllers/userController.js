@@ -9,8 +9,6 @@ class UserController{
     static async register(req,res,next){
         try{
             const {name,email,password} = req.body
-            console.log(req.body);
-            console.log(name,email,password);
             const checkDouble = await User.findOne({
                 where:{
                     email
@@ -25,7 +23,6 @@ class UserController{
                 email,
                 password
             })
-            console.log(addUser);
             const access_token = jwt.sign({
                 id:addUser.id,
                 name:addUser.name,
@@ -43,14 +40,12 @@ class UserController{
     static async login(req, res, next) {
         try {
             const { email, password } = req.body
-            console.log(req.body);
             const checkUser = await User.findOne({
                 where: {
                     email
                 }
             })
             if (!checkUser) {
-                console.log(checkUser);
                 next({ errCode: 'INVALID_ACCOUNT' })
             } else {
                 const result = bcrypt.compareSync(password, checkUser.password)
@@ -74,7 +69,6 @@ class UserController{
 
     static async googleLogin(req, res, next) {
         const google_token = req.headers.google_token
-        console.log(google_token, 'ini dari controller google_token headers');
         try {
             const payLoad = await verifyGoogle(google_token)
             const email = payLoad.email
@@ -105,7 +99,6 @@ class UserController{
                 res.status(201).json({ access_token })
             }
         } catch (err) {
-            console.log(err);
             next(err)
         }
 

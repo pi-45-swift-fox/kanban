@@ -50,7 +50,6 @@ export default {
       this.newTask = ''
     },
     addTaskToDb(){
-      console.log('siniiii', this.baseUrl);
       axios({
           method:'POST',
           url: this.baseUrl +'/tasks',
@@ -63,7 +62,6 @@ export default {
           }
       })
         .then(res=>{
-            console.log(res.data);
             this.$emit('fetchTasks')
             this.addTaskOpen()
         })

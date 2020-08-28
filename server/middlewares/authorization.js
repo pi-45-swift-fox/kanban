@@ -5,9 +5,8 @@ function authorization(req,res,next){
     Task.findByPk(id)
         .then(data=>{
             if(!data){
-                console.log('masuk');
                 next({errCode:'NOT_FOUND'})
-                
+
             } else {
                 if(data.UserId == req.userLogin.id){
                     next()
@@ -15,7 +14,7 @@ function authorization(req,res,next){
                     next({errCode:'FORBIDDEN'})
                 }
             }
-            
+
         })
         .catch(err=>{
             next(err)

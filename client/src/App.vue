@@ -20,8 +20,8 @@ export default {
     data(){
         return {
             page:'loginPage',
-            // baseUrl:'https://kanban-application-swift.herokuapp.com',
-            baseUrl: 'http://localhost:3001',
+            baseUrl:'https://kanban-application-swift.herokuapp.com',
+            // baseUrl: 'http://localhost:3001',
             tasks:[]
         }
     },

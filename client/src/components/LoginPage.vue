@@ -79,8 +79,6 @@ export default {
                 this.changePage('dashboard')
             })
             .catch(err=>{
-                // this.message = err.response
-                // console.log(err);
                 swal('Tet Tot', 'Wrong password or email!', 'error')
             })
 

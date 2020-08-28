@@ -55,8 +55,6 @@ export default {
   },
   methods: {
     editTask() {
-      console.log(this.type);
-      console.log(this.categoryTask);
       const id = this.task.id
       axios({
           method: 'PUT',
@@ -75,13 +73,11 @@ export default {
         })
         .catch(err => {
           swal("Not Allowed!", "You can't edit file other than yours!", "error");
-          console.log(err);
         })
     },
     deleteTask() {
       const category = this.type
       const id = this.task.id
-      console.log(category, id);
       swal({
           title: "Are you sure?",
           text: "Once deleted, you will not be able to recover this task!",
@@ -99,7 +95,6 @@ export default {
                 }
               })
               .then(res => {
-                console.log(res.data);
                 this.$emit('fetchTasks')
                 swal("Poof! Your task has been deleted!", {
                   icon: "success",
@@ -107,7 +102,6 @@ export default {
               })
               .catch(err => {
                 swal("Not Allowed!", "Not Allowed to delete this file!", "error");
-                console.log(err);
               })
 
           } else {

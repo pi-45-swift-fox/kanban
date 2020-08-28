@@ -13,11 +13,6 @@
 <script>
 export default {
     name:'Navbar',
-    data(){
-        return {
-
-        }
-    },
     props:['page'],
     methods:{
         logout(){

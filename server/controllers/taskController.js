@@ -2,7 +2,6 @@ const {Task, User} = require('../models')
 
 class TaskController{
     static async addTask(req,res,next){
-        console.log(req.body);
         try{
             const { title, category } = req.body
             const newTask = await Task.create({
@@ -12,7 +11,7 @@ class TaskController{
             })
             if(newTask){
                 res.status(201).json({'New Task' : newTask})
-            } 
+            }
 
         } catch(err) {
             next(err)
@@ -31,14 +30,13 @@ class TaskController{
                 }
             })
             if(tasks){
-                // console.log(tasks);
                 res.status(200).json(tasks)
-            } 
-            
+            }
+
         } catch(err){
             next(err)
         }
-       
+
     }
 
     static async updateTask(req,res,next){

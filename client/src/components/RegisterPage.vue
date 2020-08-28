@@ -54,7 +54,6 @@
 <script>
 import axios from 'axios'
 import GoogleSignInButton from 'vue-google-signin-button-directive'
-import google from './google.vue'
 export default {
     name:'RegisterPage',
     data(){
@@ -100,7 +99,6 @@ export default {
             this.$emit('changePage',page)
         },
         OnGoogleAuthSuccess (idToken) {
-            console.log(idToken)
             // Receive the idToken and make your magic with the backend
 
             axios({
@@ -116,7 +114,6 @@ export default {
             })
             .catch(err=>{
                 this.message = err.response
-                console.log(err);
             })
         },
         OnGoogleAuthFail (error) {
