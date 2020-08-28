@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT =process.env.PORT || 3000;
+const port =process.env.PORT || 3000;
 
 const routes = require("./routes");
 const errorHandler = require("./middlewares/errorHandlers");
@@ -14,4 +14,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", routes);
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log("Listening to port", PORT));
+app.listen(port, () => console.log("Listening to port", port));

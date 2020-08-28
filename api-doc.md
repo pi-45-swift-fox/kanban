@@ -5,22 +5,22 @@
 - body
 ```json
 {
-    email:"anton@mail.com",
-    password:"123456"
+    "email":"anton@mail.com",
+    "password":"123456"
 }
 ```
 ### response 200
 - body
 ```json
 {
-    access_token :"iwejij323ji3jf"
+    "access_token" :"iwejij323ji3jf"
 }
 ```
 ### response 400
 - body
 ```json
 {
-    message:"User or Password Incorrect"
+    "message":"User or Password Incorrect"
 }
 ```
 
@@ -28,7 +28,7 @@
 - body
 ```json
 {
-    message:"internal server error"
+    "message":"internal server error"
 }
 ```
 ## POST /regis
@@ -37,22 +37,22 @@
 - body
 ```json
 {
-    email:"anton@mail.com",
-    password:"123456"
+    "email":"anton@mail.com",
+    "password":"123456"
 }
 ```
 ### response 201
 - body
 ```json
 {
-    access_token :"iwejij323ji3jf"
+    "access_token" :"iwejij323ji3jf"
 }
 ```
 ### response 500
 - body
 ```json
 {
-    message:"internal server error"
+    "message":"internal server error"
 }
 ```
 
@@ -69,14 +69,14 @@
 - body
 ```json
 {
-    access_token :"iwejij323ji3jf"
+    "access_token" :"iwejij323ji3jf"
 }
 ```
 ### response 400
 - body
 ```json
 {
-    message:"Google Oauth trouble"
+    "message":"Google Oauth trouble"
 }
 ```
 
@@ -84,7 +84,7 @@
 - body
 ```json
 {
-    message:"internal server error"
+    "message":"internal server error"
 }
 ```
 ## GET /task
@@ -99,16 +99,16 @@
 - body
 ```json
 {
-    title:"test",
-    category:"backlog",
-    UserId:1,    
+    "title":"test",
+    "category":"backlog",
+    "UserId":1,    
 }
 ```
 ### response 500
 - body
 ```json
 {
-    message:"internal server error"
+    "message":"internal server error"
 }
 ```
 
@@ -126,7 +126,7 @@
 - body
 ```json
 {
-    message:"task berhasil di tambahkan
+    "message":"task berhasil di tambahkan
 }
 ```
 ### response 500
@@ -175,14 +175,14 @@
 - body 
 ```json
 {
-  message:"task berhasil di edit"
+  "message":"task berhasil di edit"
 }
 ```
 ### response 500
 - body
 ```json
 {
-    message:"internal server error"
+    "message":"internal server error"
 }
 ```
 
@@ -191,20 +191,20 @@
 - params
 ```json
 {
-    id:1
+    "id":1
 }
 ```
 ### response 200
 - body 
 ```json
 {
-  message:"task berhasil di delete"
+  "message":"task berhasil di delete"
 }
 ```
 ### response 500
 - body
 ```json
 {
-    message:"internal server error"
+    "message":"internal server error"
 }
 ```

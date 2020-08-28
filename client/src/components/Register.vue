@@ -44,8 +44,8 @@ export default {
         },
       })
         .then((res) => {
-          localStorage.setItem("token", res.data.access_token);
-          this.$emit(1);
+          this.$emit('emitShowLogin')
+          this.$emit("emitnotif",{text:'berhasil register , silahkan login',status:true});
         })
         .catch((err) => {
           console.log(err);
@@ -56,7 +56,6 @@ export default {
         .signIn()
         .then((response) => {
           const id_token = response.getAuthResponse().id_token;
-          console.log(id_token);
           axios({
             method: "POST",
             url: "http://localhost:3000/googlesignin",
@@ -65,11 +64,13 @@ export default {
             },
           }).then((res) => {
             localStorage.setItem("token", res.data.access_token);
-            this.$emit("emitloginStatus");
+            this.$emit("emitShowLogin");
+            this.$emit("emitnotif",{text:'berhasil login dengan google sigin',status:true});
           });
         })
         .catch((err) => {
           console.error(err);
+          this.$emit("emitnotif",{text:'gagal register',status:false});
         });
     },
   },

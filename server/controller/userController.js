@@ -50,7 +50,6 @@ class UserController {
   }
   static async googleOauth(req, res, next) {
     const token = req.body.id_token
-    console.log(client,'<<<<<<<<')
     const client = new OAuth2Client(process.env.CLIENT_ID);
     try {
       const ticket = await client.verifyIdToken({
