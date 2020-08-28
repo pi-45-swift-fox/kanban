@@ -1,6 +1,7 @@
 const {User} = require('../models')
 const Bcrypt = require('../helpers/bcrypt')
 const jwt = require('jsonwebtoken')
+const verifyGoogle = require('../helpers/verifyGoogleToken')
 
 class UserController {
     static login (req,res) {
@@ -34,45 +35,39 @@ class UserController {
             .catch(err => res.status(500).json(err))
     }
 
-    static googleSign(req, res) {
-        let { id_token } = req.body;
-        let name;
-        let email;
-        const client = new OAuth2Client(process.env.GOOGLE_ID);
-        client.verifyIdToken({
-            idToken: id_token,
-            audience: process.env.GOOGLE_ID
-        })
-            .then(ticket => {
-                email = ticket.getPayload().email;
-                name = ticket.getPayload().name;
+    static async googleLogin(req, res, next) {
+        const google_token = req.headers.google_token
 
-                return User.findOne({
-                    where: { email }
-                })
-            })
-            .then(data => {
-                if (data) {
-                    return {
-                        id: data.id,
-                        email: data.email
-                    }
-                } else {
-                    return User.create({ email, password: '123' })
+        try {
+            const payload = await verifyGoogle(google_token)
+            const email = payload.email
+            const user = await User.findOne({
+                where: {
+                    email
                 }
             })
-            .then(data => {
-                const token = jwt.sign({id: data.id}, process.env.SECRET)
-                return res.status(201).json({
-                    id: data.id,
-                    name,
-                    email: data.email,
-                    token
+            const password = '123'
+            if(user) {
+                let check = Bcrypt.compare(password, user.password)
+                if(check) {
+                    const token = jwt.sign({id: user.id, email: user.email, }, process.env.SECRET)
+                    res.status(200).json({token})
+                } else {
+                    
+                }
+            } else {
+                const newUser = await User.create({
+                    email,
+                    password
                 })
-            })
-            .catch(err => {
-                next(err);
-            })
+                const token = jwt.sign({id: newUser.id, email: newUser.email, }, process.env.SECRET)
+                res.status(200).json({token})
+                // console.log({token});
+                
+            }
+        } catch(err) {
+            console.log(err)
+        }
     }
 }
 

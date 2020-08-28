@@ -82,7 +82,8 @@ export default {
       axios({
         method: "post",
         url: this.baseUrl + "/googleSign",
-        data: { id_token }
+        headers: {google_token: id_token}
+        // data: { id_token }
       })
         .then(respon => {
           localStorage.setItem('accesstoken', respon.data.token)
