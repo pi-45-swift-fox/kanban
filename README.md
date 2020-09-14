@@ -1,6 +1,9 @@
 # kanban
 Membuat website untuk manajemen task
 
+heroku = https://kanban-app-gacor.herokuapp.com/
+firebase = https://kanban-app-9687b.web.app/
+
 ## RESTful endpoints
 List of available endpoint:
 
