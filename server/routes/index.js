@@ -12,7 +12,7 @@ route.get('/', function(req, res, next) {
 
 route.post('/login', UserController.login)
 route.post('/register', UserController.register)
-route.post('/googleSign', UserController.googleSign)
+route.post('/googleSign', UserController.googleLogin)
 
 route.use(authenticate)
 route.get('/tasks', TaskController.show)
