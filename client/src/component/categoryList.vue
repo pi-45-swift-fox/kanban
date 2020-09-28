@@ -59,7 +59,20 @@ export default {
             this.confirmDelete = true
         },
         formEditTask() {
-            this.goToEditTask = true
+            let id = this.task.id
+            axios({
+                method: 'get',
+                url: this.baseUrl + id,
+                headers: {
+                    accesstoken: localStorage.accesstoken
+                }
+            })
+            .then(_ => {
+                this.goToEditTask = true
+            })
+            .catch(err => {
+                swal('Ooppss!!', `You don't have access`, 'error')
+            })
         },
         cancelEditForm() {
             this.goToEditTask = false
@@ -68,7 +81,6 @@ export default {
             let title = this.title
             let id = this.task.id
             let category = this.newCategory
-            console.log(this.category);
             
             axios({
                 method: 'put',
@@ -83,42 +95,47 @@ export default {
                 this.$emit('refresh')
             })
             .catch(err => {
-                swal('Ooppss!!', `You don't have access`, 'error')
-                console.log(err, 'error client edit')})
+                console.log(err)
+            })
         },
         deleteTask() {
             let id = this.task.id
-            swal({
-                title: 'Are you sure ??',
-                text: `Once deleted, you will not be able to recover this task!`,
-                icon: 'warning',
-                buttons: true,
-                dangerMode: true
-
-            })
-            .then(willDel => {
-                if(willDel) {
-                    axios({
-                        method: 'delete',
-                        url: this.baseUrl + id,
-                        headers: {
-                            accesstoken: localStorage.accesstoken 
-                        },
-                    })
-                    .then(res => {
-                        this.$emit('refresh')
-                    })
-                    .catch(err => {
-                        console.log(err, 'error client delete')
-                        swal('Ooppss!!', `You don't have access`, 'error')
-                    })
+            axios({
+                method: 'get',
+                url: this.baseUrl + id,
+                headers: {
+                    accesstoken: localStorage.accesstoken
                 }
             })
+            .then(res => {
+                swal({
+                    title: 'Are you sure ??',
+                    text: `Once deleted, you will not be able to recover this task!`,
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true
+    
+                })
+                .then(willDel => {
+                    if(willDel) {
+                        axios({
+                            method: 'delete',
+                            url: this.baseUrl + id,
+                            headers: {
+                                accesstoken: localStorage.accesstoken 
+                            },
+                        })
+                        .then(res => {
+                            this.$emit('refresh')
+                        })
+                    }
+                })
+            })
+            .catch(err => {
+                swal('Ooppss!!', `You don't have access`, 'error')
+            })
         }
-    },
-    // created() {
-    //     this.task.createdAt = new Date(this.task.createdAt).toDateString()
-    // },
+    }
 }
 </script>
 

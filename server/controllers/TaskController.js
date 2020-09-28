@@ -38,7 +38,7 @@ class TaskController {
 
     static getUser(req, res) {
         Task.findByPk(+req.params.id)
-            .then(data => res.status(200).json({msg: 'get user'}))
+            .then(data => res.status(200).json(data))
             .catch(err => res.status(500).json(err))
     }
 }

@@ -10686,9 +10686,10 @@ var _default = {
       (0, _axios.default)({
         method: "post",
         url: this.baseUrl + "/googleSign",
-        data: {
-          id_token: id_token
-        }
+        headers: {
+          google_token: id_token
+        } // data: { id_token }
+
       }).then(function (respon) {
         localStorage.setItem('accesstoken', respon.data.token);
 
@@ -11999,18 +12000,30 @@ var _default = {
       this.confirmDelete = true;
     },
     formEditTask: function formEditTask() {
-      this.goToEditTask = true;
+      var _this = this;
+
+      var id = this.task.id;
+      (0, _axios.default)({
+        method: 'get',
+        url: this.baseUrl + id,
+        headers: {
+          accesstoken: localStorage.accesstoken
+        }
+      }).then(function (_) {
+        _this.goToEditTask = true;
+      }).catch(function (err) {
+        (0, _sweetalert.default)('Ooppss!!', "You don't have access", 'error');
+      });
     },
     cancelEditForm: function cancelEditForm() {
       this.goToEditTask = false;
     },
     editTask: function editTask() {
-      var _this = this;
+      var _this2 = this;
 
       var title = this.title;
       var id = this.task.id;
       var category = this.newCategory;
-      console.log(this.category);
       (0, _axios.default)({
         method: 'put',
         url: this.baseUrl + id,
@@ -12022,45 +12035,48 @@ var _default = {
           category: category
         }
       }).then(function (res) {
-        _this.goToEditTask = false;
+        _this2.goToEditTask = false;
 
-        _this.$emit('refresh');
+        _this2.$emit('refresh');
       }).catch(function (err) {
-        (0, _sweetalert.default)('Ooppss!!', "You don't have access", 'error');
-        console.log(err, 'error client edit');
+        console.log(err);
       });
     },
     deleteTask: function deleteTask() {
-      var _this2 = this;
+      var _this3 = this;
 
       var id = this.task.id;
-      (0, _sweetalert.default)({
-        title: 'Are you sure ??',
-        text: "Once deleted, you will not be able to recover this task!",
-        icon: 'warning',
-        buttons: true,
-        dangerMode: true
-      }).then(function (willDel) {
-        if (willDel) {
-          (0, _axios.default)({
-            method: 'delete',
-            url: _this2.baseUrl + id,
-            headers: {
-              accesstoken: localStorage.accesstoken
-            }
-          }).then(function (res) {
-            _this2.$emit('refresh');
-          }).catch(function (err) {
-            console.log(err, 'error client delete');
-            (0, _sweetalert.default)('Ooppss!!', "You don't have access", 'error');
-          });
+      (0, _axios.default)({
+        method: 'get',
+        url: this.baseUrl + id,
+        headers: {
+          accesstoken: localStorage.accesstoken
         }
+      }).then(function (res) {
+        (0, _sweetalert.default)({
+          title: 'Are you sure ??',
+          text: "Once deleted, you will not be able to recover this task!",
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true
+        }).then(function (willDel) {
+          if (willDel) {
+            (0, _axios.default)({
+              method: 'delete',
+              url: _this3.baseUrl + id,
+              headers: {
+                accesstoken: localStorage.accesstoken
+              }
+            }).then(function (res) {
+              _this3.$emit('refresh');
+            });
+          }
+        });
+      }).catch(function (err) {
+        (0, _sweetalert.default)('Ooppss!!', "You don't have access", 'error');
       });
     }
-  } // created() {
-  //     this.task.createdAt = new Date(this.task.createdAt).toDateString()
-  // },
-
+  }
 };
 exports.default = _default;
         var $e5f6fa = exports.default || module.exports;
@@ -12803,7 +12819,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40003" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46881" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
