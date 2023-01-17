@@ -65,7 +65,7 @@
 <script>
 import axios from "../api/axios";
 import Swal from 'sweetalert2/src/sweetalert2.js';
-import GoogleSignIn from "./GoogleSignIn";
+import GoogleSignIn from "./GoogleSignIn.vue";
 
 export default {
   name: "Login",

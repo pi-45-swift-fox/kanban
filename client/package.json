@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +21,9 @@
     "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue2": "^2.2.0",
     "@vue/component-compiler-utils": "^3.2.0",
+    "vite": "^4.0.4",
     "vue-template-compiler": "^2.6.11"
   }
 }

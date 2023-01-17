@@ -30,9 +30,9 @@
 
 <script>
 import axios from "../src/api/axios";
-import CategoryCard from "./components/CatergoryCard";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import CategoryCard from "./components/CatergoryCard.vue";
+import Login from "./components/Login.vue";
+import Register from "./components/Register.vue";
 
 export default {
   name: "App",

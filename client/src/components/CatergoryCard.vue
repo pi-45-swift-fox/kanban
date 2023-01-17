@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import TaskCard from "./TaskCard";
+import TaskCard from "./TaskCard.vue";
 import Swal from 'sweetalert2';
 import axios from '../api/axios';
 
