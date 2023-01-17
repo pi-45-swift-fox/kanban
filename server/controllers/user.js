@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const { OAuth2Client } = require('google-auth-library');
 
 module.exports = class UserController {
-    
+
     static async detail(req, res, next) {
         try {
             const data = await User.findOne({
@@ -75,7 +75,7 @@ module.exports = class UserController {
                     email: req.body.email
                 }
             });
-    
+
             if (chck) {
                 next({
                     code: 409,
@@ -124,7 +124,7 @@ module.exports = class UserController {
                 const newUser = await User.create({
                     username: payload.name,
                     email: payload.email,
-                    password: process.env.GOOGLE_PASSWORD
+                    password: "user created this way should be on different method"
                 });
 
                 const token = jwt.sign({
